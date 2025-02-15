@@ -1,4 +1,5 @@
 package Clase_07_02_2025;
+
 import java.util.Scanner;
 import model.Sedan;
 
