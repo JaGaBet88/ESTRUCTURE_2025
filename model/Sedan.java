@@ -2,21 +2,10 @@ package model;
 
 public class Sedan extends Vehicle {
     
-    private char swConvertible;
+    private char convertible;
 
-    public Sedan(byte doors, byte wheels, char swConvertible) {
-        super(doors, wheels);
-        this.swConvertible = swConvertible;
-    }
-
-    @Override
-    boolean register() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    boolean update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    public Sedan(boolean convertible, byte doors, byte wheels, char swConvertible) {
+        super(doors, wheels, license);
+        this.convertible = convertible;
+    }    
 }

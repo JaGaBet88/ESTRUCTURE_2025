@@ -12,21 +12,39 @@ public class Clase_07_02_2025 {
     }
 
     private static void register() {
-        System.out.println("Ingresar tipo de auto 1 para Sedan o 2 para Suv");
-        byte kindCar = scan.nextByte();
+        byte kindCar;
+        do {
+            System.out.println("Ingresar tipo de auto 1 para Sedan o 2 para Suv");
+            kindCar = scan.nextByte();
+        } while (kindCar != 1 && kindCar != 2);
 
-        System.out.println("\n Ingrese el numero de puertas: ");
-        byte doors = scan.nextByte();
+        byte doors;
 
-        System.out.println("Ingrese el numero de ruedas: ");
-        byte wheels = scan.nextByte();
+        do {
+            System.out.println("Ingresar el numero de puertas: ");
+            doors = scan.nextByte();
+        } while (doors < 2 || doors > 5);
+
+        byte wheels;
+
+        do {
+            System.out.println("Ingresar el numero de ruedas: ");
+            wheels = scan.nextByte();
+        } while (wheels != 4);
+
+  
+        System.out.println("Ingresar la placa: ");
+        String license = scan.next();
 
         boolean convert;
         byte weight;
 
         if (kindCar == 1) {
-            System.out.println("Ingrese S si es convertible o N de otra forma: ");
-            char swConvertible = scan.next().toUpperCase().charAt(0);
+            char swConvertible;
+            do {
+                System.out.println("Ingrese S si es convertible o N de otra forma: ");
+                swConvertible = scan.next().toUpperCase().charAt(0);
+            } while (swConvertible != 'S' && swConvertible != 'N');
 
             convert = swConvertible == 'S'; // Operador ternario
             
@@ -34,11 +52,7 @@ public class Clase_07_02_2025 {
 //            objVehicle.setdoors(doors);
 //            objVehicle.setNumWheels(wheels);
 
-            Sedan objSedan = new Sedan(doors, wheels, swConvertible);
-
-            System.out.println("\nLos datos recuperados son: ");
-            System.out.println("Nro. puertas: " + objSedan.getdoors());
-            System.out.println("Nro. ruedad: " + objSedan.getNumWheels());
+            Sedan objSedan = new Sedan(convert, doors, wheels, license);
 
         } else {
             System.out.println("Ingrese la capacidad de carga: ");

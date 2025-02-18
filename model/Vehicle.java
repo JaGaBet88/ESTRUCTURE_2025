@@ -2,8 +2,9 @@ package model;
 
 abstract class Vehicle {
 
-    protected byte doors;
-    protected byte numWheels;
+    protected byte doors; //Puertas
+    protected byte numWheels; //Número de llantas
+    protected String license; //Placa
 
     public byte getdoors() {
         return doors;
@@ -21,9 +22,18 @@ abstract class Vehicle {
         this.numWheels = numWheels;
     }
 
-    public Vehicle(byte doors, byte wheels) {
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public Vehicle(byte doors, byte wheels, String license) {
         this.doors = doors;
         this.numWheels = wheels;
+        this.license = license;
     }
     
     abstract boolean register();
