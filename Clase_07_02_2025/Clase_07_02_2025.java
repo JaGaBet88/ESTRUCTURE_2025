@@ -52,7 +52,7 @@ public class Clase_07_02_2025 {
 //            objVehicle.setdoors(doors);
 //            objVehicle.setNumWheels(wheels);
 
-            Sedan objSedan = new Sedan(convert, doors, wheels, swConvertible, license);
+            Sedan objSedan = new Sedan(convert, doors, wheels, license);
 
         } else {
             System.out.println("Ingrese la capacidad de carga: ");
