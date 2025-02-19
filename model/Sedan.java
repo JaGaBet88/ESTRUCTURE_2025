@@ -17,15 +17,4 @@ public class Sedan extends Vehicle {
         this.convertible = convertible;
     }
 
-    @Override
-    boolean register() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'register'");
-    }
-
-    @Override
-    boolean update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }    
 }
