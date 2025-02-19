@@ -4,7 +4,7 @@ abstract class Vehicle {
 
     protected byte doors; //Puertas
     protected byte numWheels; //Número de llantas
-    protected String license; //Placa
+    protected static String license; //Placa
 
     public byte getdoors() {
         return doors;
