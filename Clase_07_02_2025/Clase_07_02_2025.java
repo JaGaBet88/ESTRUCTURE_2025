@@ -15,13 +15,8 @@ public class Clase_07_02_2025 {
         byte kindCar;
         do {
             System.out.println("Ingresar tipo de auto 1 para Sedan o 2 para Suv");
-            try {
-                kindCar = scan.nextByte();
-            } catch (Exception e) {
-                System.out.println("Entrada inválida. Ingrese un número.");
-                scan.next(); //Limpiar buffer
-                kindCar = 0;
-            }
+            kindCar = scan.nextByte();
+            scan.next(); //Limpiar buffer
         } while (kindCar != 1 && kindCar != 2);
 
         byte doors;
