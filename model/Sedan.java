@@ -2,7 +2,7 @@ package model;
 
 public class Sedan extends Vehicle {
     
-    public boolean convertible;
+    private boolean convertible;
 
     public boolean isConvertible() {
         return convertible;
@@ -12,8 +12,8 @@ public class Sedan extends Vehicle {
         this.convertible = convertible;
     }
 
-    public Sedan(boolean convertible, byte doors, byte wheels, String license) {
-        super(doors, wheels, license);
+    public Sedan(boolean convertible, byte doors, byte numWheels, String license) {
+        super(doors, numWheels, license);
         this.convertible = convertible;
     }
 }

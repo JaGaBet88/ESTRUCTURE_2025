@@ -15,7 +15,13 @@ public class Clase_07_02_2025 {
         byte kindCar;
         do {
             System.out.println("Ingresar tipo de auto 1 para Sedan o 2 para Suv");
-            kindCar = scan.nextByte();
+            try {
+                kindCar = scan.nextByte();
+            } catch (Exception e) {
+                System.out.println("Entrada inválida. Ingrese un número.");
+                scan.next(); //Limpiar buffer
+                kindCar = 0;
+            }
         } while (kindCar != 1 && kindCar != 2);
 
         byte doors;
@@ -46,10 +52,6 @@ public class Clase_07_02_2025 {
             } while (esConvertible != 'S' && esConvertible != 'N');
 
             convert = esConvertible == 'S'; // Operador ternario
-            
-//            Vehicle objVehicle = new Vehicle();
-//            objVehicle.setdoors(doors);
-//            objVehicle.setNumWheels(wheels);
 
             Sedan objSedan = new Sedan(convert, doors, wheels, license);
         } else {
