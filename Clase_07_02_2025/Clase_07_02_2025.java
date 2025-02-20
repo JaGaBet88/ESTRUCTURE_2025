@@ -31,7 +31,6 @@ public class Clase_07_02_2025 {
             System.out.println("Ingresar el numero de ruedas: ");
             wheels = scan.nextByte();
         } while (wheels != 4);
-
   
         System.out.println("Ingresar la placa: ");
         String license = scan.next();
@@ -40,20 +39,19 @@ public class Clase_07_02_2025 {
         byte weight;
 
         if (kindCar == 1) {
-            char swConvertible;
+            char esConvertible;
             do {
                 System.out.println("Ingrese S si es convertible o N de otra forma: ");
-                swConvertible = scan.next().toUpperCase().charAt(0);
-            } while (swConvertible != 'S' && swConvertible != 'N');
+                esConvertible = scan.next().toUpperCase().charAt(0);
+            } while (esConvertible != 'S' && esConvertible != 'N');
 
-            convert = swConvertible == 'S'; // Operador ternario
+            convert = esConvertible == 'S'; // Operador ternario
             
 //            Vehicle objVehicle = new Vehicle();
 //            objVehicle.setdoors(doors);
 //            objVehicle.setNumWheels(wheels);
 
             Sedan objSedan = new Sedan(convert, doors, wheels, license);
-
         } else {
             System.out.println("Ingrese la capacidad de carga: ");
             weight = scan.nextByte();

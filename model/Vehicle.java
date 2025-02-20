@@ -6,11 +6,11 @@ abstract class Vehicle {
     protected byte numWheels; //Número de llantas
     protected static String license; //Placa
 
-    public byte getdoors() {
+    public byte getDoors() {
         return doors;
     }
 
-    public void setdoors(byte doors) {
+    public void setDoors(byte doors) {
         this.doors = doors;
     }
 
@@ -30,12 +30,9 @@ abstract class Vehicle {
         this.license = license;
     }
 
-    public Vehicle(byte doors, byte wheels, String license) {
+    public Vehicle(byte doors, byte numWheels, String license) {
         this.doors = doors;
-        this.numWheels = wheels;
+        this.numWheels = numWheels;
         this.license = license;
     }
-    
-    abstract boolean register();
-    abstract boolean update();
 }
