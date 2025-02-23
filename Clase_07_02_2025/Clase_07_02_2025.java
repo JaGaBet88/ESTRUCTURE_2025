@@ -11,7 +11,6 @@ public class Clase_07_02_2025 {
 
     public static void main(String[] args) {
         register();
-
     }
 
     private static void register() {
@@ -22,7 +21,7 @@ public class Clase_07_02_2025 {
             do {
                 System.out.println("Ingresar tipo de auto 1 para Sedan o 2 para Suv");
                 kindCar = scan.nextByte();
-            } while (kindCar < 1 || kindCar > 2);
+            } while (kindCar != 1 && kindCar != 2);
 
             byte doors;
             do {
@@ -39,7 +38,6 @@ public class Clase_07_02_2025 {
             System.out.println("Ingrese la placa del vehiculo: ");
             String license = scan.next();
 
-            boolean convert;
             byte weight;
 
             if (kindCar == 1) {
@@ -50,7 +48,7 @@ public class Clase_07_02_2025 {
             }
 
             do {
-                System.out.println("Ingrese S para ingresar otro auto o N para No. ");
+                System.out.println("Desea registrar otro vehiculo? S/N");
                 swOtherVehicle = scan.next().toUpperCase().charAt(0);
             } while (swOtherVehicle != 'S' && swOtherVehicle != 'N');
 
