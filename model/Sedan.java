@@ -4,7 +4,7 @@ public class Sedan extends Vehicle {
     
     private boolean convertible;
 
-    public boolean isConvertible() {
+    public boolean getConvertible() {
         return convertible;
     }
 
