@@ -5,6 +5,7 @@ abstract class Vehicle {
     protected byte doors;
     protected byte numWheels;
     protected String license;
+    protected Brand brand;
 
     public byte getDoors() {
         return doors;
@@ -28,11 +29,23 @@ abstract class Vehicle {
 
     public void setLicense(String license) {
         this.license = license;
-    }    
+    }  
 
-    public Vehicle(byte doors, byte numWheels, String license) {
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+    
+    
+
+    public Vehicle(byte doors, byte numWheels, String license, Brand brand) {
         this.doors = doors;
         this.numWheels = numWheels;
         this.license = license;
+        this.brand = brand;
     }
 }
+
