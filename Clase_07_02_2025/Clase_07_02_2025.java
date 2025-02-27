@@ -25,7 +25,7 @@ public class Clase_07_02_2025 {
             do {
                 System.out.println("Ingresar tipo de auto 1 para Sedan o 2 para Suv");
                 kindCar = scan.nextByte();
-            } while (kindCar < 1 || kindCar > 2);
+            } while (kindCar != 1 && kindCar != 2);
 
             byte doors;
             do {
