@@ -12,6 +12,9 @@ public class Sedan extends Vehicle {
         this.convertible = convertible;
     }
 
+    public Sedan() {
+    }
+
     public Sedan(boolean convertible, byte doors, byte numWheels, String license, Brand brand) {
         super(doors, numWheels, license, brand);
         this.convertible = convertible;

@@ -3,12 +3,15 @@ package Clase_07_02_2025;
 import java.util.Scanner;
 import model.Sedan;
 import model.Brand;
+import model.Suv;
 import controller.SedanController;
+import controller.SuvController;
 
 public class Clase_07_02_2025 {
 
     static Scanner scan = new Scanner(System.in);
     static SedanController objSedanController = new SedanController();
+    static SuvController objSuvController = new SuvController();
 
     public static void main(String[] args) {
         register();
@@ -25,7 +28,7 @@ public class Clase_07_02_2025 {
             do {
                 System.out.println("Ingresar tipo de auto 1 para Sedan o 2 para Suv");
                 kindCar = scan.nextByte();
-            } while (kindCar != 1 && kindCar != 2);
+            } while (kindCar < 1 || kindCar > 2);
 
             byte doors;
             do {
@@ -79,11 +82,26 @@ public class Clase_07_02_2025 {
         Sedan objSedan = new Sedan(convert, doors, wheels, license, objBrand);
 
         try {
-            if (objSedanController.register(objSedan)) {
+            Suv objSuv = new Suv();
+            if (objSedanController.register(objSedan, objSuv)) {
                 System.out.println("El Sedan fue registrado!...");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private void registerSuv(byte doors, byte wheels, String license, Brand objBrand) {
+
+        Suv objSuv = new Suv(doors, wheels, license, objBrand);
+        
+        try {
+            Sedan objSedan = new Sedan();
+            if (objSedanController.register(objSedan, objSuv)) {
+                System.out.println("El Suv fue registrado!...");
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 
@@ -142,14 +160,14 @@ public class Clase_07_02_2025 {
 
             System.out.println("Ingrese la placa del vehiculo: ");
             String strlicense = scan.next();
-            
+
             String name = "";
             do {
                 System.out.println("Ingrese la marca del vehiculo: ");
                 name = scan.next();
             } while (name == "");
 
-            Brand objBrand = new Brand(name);            
+            Brand objBrand = new Brand(name);
 
             char swConvertible;
             do {
@@ -162,7 +180,8 @@ public class Clase_07_02_2025 {
             Sedan objSedan = new Sedan(convert, doors, wheels, strlicense, objBrand);
 
             try {
-                if (objSedanController.upate(license, objSedan)) {
+                Suv objSuv = new Suv();
+                if (objSedanController.upate(license, objSedan, objSuv)) {
                     System.out.println("Sedan Actualizado correctamente!...");
                 }
             } catch (Exception e) {
@@ -227,4 +246,3 @@ public class Clase_07_02_2025 {
 
     }
 }
-

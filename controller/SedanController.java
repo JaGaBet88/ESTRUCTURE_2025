@@ -2,13 +2,14 @@ package controller;
 
 import model.Sedan;
 import java.util.ArrayList;
+import model.Suv;
 
 public class SedanController extends VehicleController {
 
     ArrayList<Sedan> objSedans = new ArrayList<Sedan>();
 
     @Override
-    public boolean register(Sedan objSedan) throws Exception {
+    public boolean register(Sedan objSedan, Suv objSuv) throws Exception {
         try {
             objSedans.add(objSedan);
         } catch (Exception e) {
@@ -40,7 +41,7 @@ public class SedanController extends VehicleController {
     }
 
     @Override
-    public boolean upate(String license, Sedan objSedan) throws Exception {
+    public boolean upate(String license, Sedan objSedan, Suv objSuv) throws Exception {
         try {
             for (Sedan sedan : objSedans) {
                 if (sedan.getLicense().equals(license)) {

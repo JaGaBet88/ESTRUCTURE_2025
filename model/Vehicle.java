@@ -38,8 +38,9 @@ abstract class Vehicle {
     public void setBrand(Brand brand) {
         this.brand = brand;
     }
-    
-    
+
+    public Vehicle() {
+    }
 
     public Vehicle(byte doors, byte numWheels, String license, Brand brand) {
         this.doors = doors;
