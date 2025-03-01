@@ -59,7 +59,7 @@ public class Clase_07_02_2025 {
             if (kindCar == 1) {
                 registerSedan(doors, wheels, license, objBrand);
             } else {
-                // Aca va el llamdo a metodo que registra un suv...
+                registerSuv(doors, wheels, license, objBrand);
             }
 
             do {
@@ -91,9 +91,14 @@ public class Clase_07_02_2025 {
         }
     }
 
-    private void registerSuv(byte doors, byte wheels, String license, Brand objBrand) {
+    private static void registerSuv(byte doors, byte wheels, String license, Brand objBrand) {
+        byte weight;
+        do {
+            System.out.println("Ingrese el peso del vehiculo: ");
+            weight = scan.nextByte();
+        } while (weight < 1 || weight > 5);
 
-        Suv objSuv = new Suv(doors, wheels, license, objBrand);
+        Suv objSuv = new Suv(weight, doors, wheels, license, objBrand);
         
         try {
             Sedan objSedan = new Sedan();
@@ -101,7 +106,7 @@ public class Clase_07_02_2025 {
                 System.out.println("El Suv fue registrado!...");
             }
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
