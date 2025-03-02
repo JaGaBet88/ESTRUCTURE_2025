@@ -32,7 +32,6 @@ public class SuvController extends VehicleController {
                             + this.objSuvs.get(i).getNumWheels() + " - ";
                     strSuv += this.objSuvs.get(i).getWeight() + " - ";
                 }
-                break;
             }
         } catch (Exception e) {
             throw new Exception("Error al consultar un Suv!...");

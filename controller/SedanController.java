@@ -31,7 +31,6 @@ public class SedanController extends VehicleController {
 
                     strSedan += this.objSedans.get(i).getConvertible() ? "Convertible" : "Convencional";
                 }
-                break;
             }
         } catch (Exception e) {
             throw new Exception("Error al consultar un Sedan!...");
