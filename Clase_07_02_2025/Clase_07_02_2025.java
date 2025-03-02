@@ -99,7 +99,7 @@ public class Clase_07_02_2025 {
 
         try {
             Sedan objSedan = new Sedan();
-            if (objSedanController.register(objSedan, objSuv)) {
+            if (objSuvController.register(objSedan, objSuv)) {
                 System.out.println("El Suv fue registrado!...");
             }
         } catch (Exception e) {
