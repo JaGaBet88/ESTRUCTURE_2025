@@ -29,7 +29,7 @@ abstract class Vehicle {
 
     public void setLicense(String license) {
         this.license = license;
-    }  
+    }
 
     public Brand getBrand() {
         return brand;
@@ -49,4 +49,3 @@ abstract class Vehicle {
         this.brand = brand;
     }
 }
-

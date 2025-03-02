@@ -41,7 +41,7 @@ public class SedanController extends VehicleController {
     }
 
     @Override
-    public boolean upate(String license, Sedan objSedan, Suv objSuv) throws Exception {
+    public boolean update(String license, Sedan objSedan, Suv objSuv) throws Exception {
         try {
             for (Sedan sedan : objSedans) {
                 if (sedan.getLicense().equals(license)) {

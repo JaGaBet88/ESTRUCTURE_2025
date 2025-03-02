@@ -15,7 +15,7 @@ public class Clase_07_02_2025 {
 
     public static void main(String[] args) {
         register();
-        searhc();
+        search();
         remove();
         showAll();
     }
@@ -49,12 +49,9 @@ public class Clase_07_02_2025 {
             do {
                 System.out.println("Ingrese la marca del vehiculo: ");
                 name = scan.next();
-            } while (name == "");
+            } while (name.equals(""));
 
             Brand objBrand = new Brand(name);
-
-            boolean convert;
-            byte weight;
 
             if (kindCar == 1) {
                 registerSedan(doors, wheels, license, objBrand);
@@ -99,7 +96,7 @@ public class Clase_07_02_2025 {
         } while (weight < 1 || weight > 5);
 
         Suv objSuv = new Suv(weight, doors, wheels, license, objBrand);
-        
+
         try {
             Sedan objSedan = new Sedan();
             if (objSedanController.register(objSedan, objSuv)) {
@@ -110,8 +107,8 @@ public class Clase_07_02_2025 {
         }
     }
 
-    private static void searhc() {
-        System.out.println("\nConsultar vehiculos");
+    private static void search() {
+        System.out.println("\n---CONSULTAR VEHICULOS---");
         byte kindCar;
 
         do {
@@ -128,7 +125,6 @@ public class Clase_07_02_2025 {
 
                 if (result != "") {
                     System.out.println(result);
-
                     updateSedan(license);
                 } else {
                     System.out.println("No se encontro Sedan con esa placa!...");
@@ -138,13 +134,24 @@ public class Clase_07_02_2025 {
             }
 
         } else {
-            // por aca se hace el search del suv.... y se hace el llamado al update del suv.
+            try {
+                String result = objSuvController.search(license);
+
+                if (result != "") {
+                    System.out.println(result);
+                    updateSuv(license);
+                } else {
+                    System.out.println("No se encontro Suv con esa placa!...");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
-    }
+    }    
 
     private static void updateSedan(String license) {
         System.out.println("\nActualizar Sedan");
-        char swUpdate;
+        char swUpdate;	
         do {
             System.out.println("Ingrese S Si desea Actualizar o N si No lo desea.");
             swUpdate = scan.next().toUpperCase().charAt(0);
@@ -186,8 +193,59 @@ public class Clase_07_02_2025 {
 
             try {
                 Suv objSuv = new Suv();
-                if (objSedanController.upate(license, objSedan, objSuv)) {
+                if (objSedanController.update(license, objSedan, objSuv)) {
                     System.out.println("Sedan Actualizado correctamente!...");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
+    private static void updateSuv(String license) {
+        System.out.println("\nActualizar Suv");
+        char swUpdate;	
+        do {
+            System.out.println("Ingrese S Si desea Actualizar o N si No lo desea.");
+            swUpdate = scan.next().toUpperCase().charAt(0);
+        } while (swUpdate != 'S' && swUpdate != 'N');
+
+        if (swUpdate == 'S') {
+            byte doors;
+            do {
+                System.out.println("\nIngrese el numero de puertas: ");
+                doors = scan.nextByte();
+            } while (doors < 2 || doors > 5);
+
+            byte wheels;
+            do {
+                System.out.println("Ingrese el numero de ruedas: ");
+                wheels = scan.nextByte();
+            } while (wheels != 4);
+
+            System.out.println("Ingrese la placa del vehiculo: ");
+            String strlicense = scan.next();
+
+            String name = "";
+            do {
+                System.out.println("Ingrese la marca del vehiculo: ");
+                name = scan.next();
+            } while (name == "");
+
+            Brand objBrand = new Brand(name);
+
+            byte weight;
+            do {
+                System.out.println("Ingrese el peso del vehiculo: ");
+                weight = scan.nextByte();
+            } while (weight < 1 || weight > 5);
+
+            Suv objSuv = new Suv(weight, doors, wheels, strlicense, objBrand);
+
+            try {
+                Sedan objSedan = new Sedan();
+                if (objSuvController.update(license, objSedan, objSuv)) {
+                    System.out.println("Suv Actualizado correctamente!...");
                 }
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
@@ -218,7 +276,15 @@ public class Clase_07_02_2025 {
                 System.out.println("Error: " + e.getMessage());
             }
         } else {
-            // Aca va la logica del suv....
+            try {
+                if (objSuvController.remove(license)) {
+                    System.out.println("\nEl vehiculo fue removido de la lista!...");
+                } else {
+                    System.out.println("\nEl numero de la placa no es valido. Verifique!...");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
 
     }
@@ -246,7 +312,17 @@ public class Clase_07_02_2025 {
             }
 
         } else {
-            // por aca se hace el search del suv....
+            try {
+                String result = objSuvController.list();
+
+                if (result != "") {
+                    System.out.println(result);
+                } else {
+                    System.out.println("No hay suv registrados!...");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
 
     }

@@ -22,22 +22,80 @@ public class SuvController extends VehicleController {
 
     @Override
     public String search(String license) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String strSuv = "";
+
+        try {
+            for (int i = 0; i < this.objSuvs.size(); i++) {
+                if (this.objSuvs.get(i).getLicense().equals(license)) {
+                    strSuv += this.objSuvs.get(i).getLicense() + " - "
+                            + this.objSuvs.get(i).getDoors() + " - "
+                            + this.objSuvs.get(i).getNumWheels() + " - ";
+                    strSuv += this.objSuvs.get(i).getWeight() + " - ";
+                }
+                break;
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al consultar un Suv!...");
+        }
+
+        return strSuv;
     }
 
     @Override
-    public boolean upate(String license, Sedan objSedan, Suv objSuv) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean update(String license, Sedan objSedan, Suv objSuv) throws Exception {
+        try {
+            for (Suv suv : objSuvs) {
+                if (suv.getLicense().equals(license)) {
+                    suv.setLicense(objSedan.getLicense());
+                    suv.setDoors(objSedan.getDoors());
+                    suv.setNumWheels(objSedan.getNumWheels());
+                    suv.setBrand(objSedan.getBrand());
+                    suv.setWeight(objSuv.getWeight());
+                }
+                break;
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al actulizar un Suv!...");
+        }
+        return true;
     }
 
     @Override
     public boolean remove(String license) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean result = false;
+
+        try {
+            for (Suv suv : objSuvs) {
+                if (suv.getLicense().equals(license)) {
+                    objSuvs.remove(suv);
+                    result = true;
+                }
+                break;
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al remover un Suv!...");
+        }
+        return result;
     }
 
     @Override
     public String list() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String strSuv = "";
+
+        try {
+            for (int i = 0; i < this.objSuvs.size(); i++) {
+                strSuv += this.objSuvs.get(i).getLicense() + " - "
+                        + this.objSuvs.get(i).getDoors() + " - "
+                        + this.objSuvs.get(i).getNumWheels() + " - "
+                        + this.objSuvs.get(i).getBrand() + " - ";
+                strSuv += this.objSuvs.get(i).getWeight() + " - ";
+
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al listar un Suv!...");
+        }
+
+        return strSuv;
     }
-    
+
 }
