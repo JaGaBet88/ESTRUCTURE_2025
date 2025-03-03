@@ -45,10 +45,10 @@ public class SuvController extends VehicleController {
         try {
             for (Suv suv : objSuvs) {
                 if (suv.getLicense().equals(license)) {
-                    suv.setLicense(objSedan.getLicense());
-                    suv.setDoors(objSedan.getDoors());
-                    suv.setNumWheels(objSedan.getNumWheels());
-                    suv.setBrand(objSedan.getBrand());
+                    suv.setLicense(objSuv.getLicense());
+                    suv.setDoors(objSuv.getDoors());
+                    suv.setNumWheels(objSuv.getNumWheels());
+                    suv.setBrand(objSuv.getBrand());
                     suv.setWeight(objSuv.getWeight());
                 }
                 break;
