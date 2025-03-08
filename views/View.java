@@ -16,8 +16,8 @@ public class View {
         Scanner scanner = new Scanner(System.in);
         ContractController controller = new ContractController(20);
         
+        System.out.println("REGISTRO DE CONTRATOS\n");
         try {
-
             int type;
             do {
             System.out.println("Ingrese tipo de contrato (1 - Prestación de servicios, 2 - Indefinido): ");
