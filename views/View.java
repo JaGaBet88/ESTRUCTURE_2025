@@ -70,6 +70,9 @@ public class View {
             } while (option != 'S' && option != 'N');
 
         } while (option == 'S');
+
+        System.out.println("¡Hasta luego!");
+        scanner.close();
     }
 
 }
