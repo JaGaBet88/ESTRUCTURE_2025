@@ -1,3 +1,7 @@
+/*Desarrollo de parcial por los estudiantes de desarrollo de software:
+* Jairo Gallego Betancur
+* Stefania Valencia Garcia */
+
 package views;
 
 import models.ServiceProvision;
@@ -7,15 +11,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Vista - Interacción con el usuario
-public class Main {
+public class Vista {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ContractController controller = new ContractController(10);
+        ContractController controller = new ContractController(20);
         
         try {
+
+            int type;
+            do {
             System.out.println("Ingrese tipo de contrato (1 - Prestación de servicios, 2 - Indefinido): ");
-            int type = scanner.nextInt();
+            type = scanner.nextInt();
             scanner.nextLine();
+            }while(type != 1 && type != 2);            
             
             System.out.println("Número de contrato: ");
             String nro = scanner.nextLine();
@@ -36,6 +44,7 @@ public class Main {
                 ServiceProvision sp = new ServiceProvision(nro, date, finishDate, occupation);
                 System.out.println("Salario mensual: " + sp.monthSalary(hourValue, hourNumber));
                 controller.addContract(sp);
+
             } else if (type == 2) {
                 System.out.println("Nombre del trabajo: ");
                 String jobName = scanner.nextLine();
