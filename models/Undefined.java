@@ -16,6 +16,6 @@ public class Undefined extends Contract {
     
     @Override
     public String search() {
-        return "Contrato indefinido: " + numContract + " - " + job.getJobInfo();
+        return "Contrato indefinido: " + numContract + " - " + job.getJobInfo() + " con fecha: " + date;
     }
 }

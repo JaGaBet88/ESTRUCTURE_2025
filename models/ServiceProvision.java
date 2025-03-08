@@ -22,7 +22,7 @@ public class ServiceProvision extends Contract {
     
     @Override
     public String search() {
-        return "Contrato de prestación de servicios: " + numContract; // Simulación de búsqueda
+        return "Contrato de prestación de servicios: " + numContract + " con fecha: " + date; // Simulación de búsqueda
     }
     
 }
