@@ -17,6 +17,8 @@ public class View {
         ContractController controller = new ContractController(20);
         
         System.out.println("REGISTRO DE CONTRATOS\n");
+        char option;
+        do{
         try {
             int type;
             do {
@@ -63,8 +65,15 @@ public class View {
         } finally {
             scanner.close();
         }
-        
-        System.out.println("\nLista de contratos registrados:");
-        controller.listContracts();
+
+            do{
+            System.out.println("\nLista de contratos registrados:");
+            controller.listContracts();
+            
+            System.out.println("\n¿Desea registrar otro contrato? (s/n): ");
+            option = scanner.next().toUpperCase().charAt(0);
+            }while(option != 'S' && option != 'N');
+        }while(option != 'S');
     }
+
 }
