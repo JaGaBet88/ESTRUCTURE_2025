@@ -12,5 +12,5 @@ public abstract class Contract {
     }
 
     public abstract boolean register();
-    public abstract boolean search();
+    public abstract String search();
 }

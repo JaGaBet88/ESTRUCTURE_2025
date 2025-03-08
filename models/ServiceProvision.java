@@ -2,12 +2,12 @@ package models;
 
 public class ServiceProvision extends Contract {
     private String finishDate;
-    private String ocupation;
+    private String occupation;
 
-    public ServiceProvision(String numContract, String date, String finishDate, String ocupation) {
+    public ServiceProvision(String numContract, String date, String finishDate, String occupation) {
         super(numContract, date);
         this.finishDate = finishDate;
-        this.ocupation = ocupation;
+        this.occupation = occupation;
     }
 
     public double monthSalary(double hourValue, int hours) {
@@ -21,8 +21,8 @@ public class ServiceProvision extends Contract {
     }
     
     @Override
-    public boolean search() {
-        return true; // Simulación de búsqueda
+    public String search() {
+        return "Contrato de prestación de servicios: " + numContract; // Simulación de búsqueda
     }
     
 }
