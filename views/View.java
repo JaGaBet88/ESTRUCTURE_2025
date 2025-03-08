@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Vista - Interacción con el usuario
-public class Vista {
+public class View {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ContractController controller = new ContractController(20);
