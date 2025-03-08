@@ -29,7 +29,8 @@ public class SuvController extends VehicleController {
                 if (this.objSuvs.get(i).getLicense().equals(license)) {
                     strSuv += this.objSuvs.get(i).getLicense() + " - "
                             + this.objSuvs.get(i).getDoors() + " - "
-                            + this.objSuvs.get(i).getNumWheels() + " - ";
+                            + this.objSuvs.get(i).getNumWheels() + " - "
+                            + this.objSuvs.get(i).getBrand() + " - ";
                     strSuv += this.objSuvs.get(i).getWeight() + " - ";
                 }
             }

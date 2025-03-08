@@ -27,7 +27,8 @@ public class SedanController extends VehicleController {
                 if (this.objSedans.get(i).getLicense().equals(license)) {
                     strSedan += this.objSedans.get(i).getLicense() + " - "
                             + this.objSedans.get(i).getDoors() + " - "
-                            + this.objSedans.get(i).getNumWheels() + " - ";
+                            + this.objSedans.get(i).getNumWheels() + " - "
+                            + this.objSedans.get(i).getBrand() + " - ";
 
                     strSedan += this.objSedans.get(i).getConvertible() ? "Convertible" : "Convencional";
                 }
