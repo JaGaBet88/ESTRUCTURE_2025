@@ -4,26 +4,40 @@ import model.Node;
 
 public class List {
 
+    //Atributos tipo nodo privados
     private Node firstPte;
     private Node currentPte;
 
+    //Constructor de la clase
     public List() {
         this.firstPte = null;
         this.currentPte = null;
     }
 
+    //Metodo privado para verificar si la lista esta vacia
     private boolean empty() {
         return this.firstPte == null;
     }
 
-    public boolean insertList(int age) throws Exception {
+    //Metodo para insertar un nodo al inicio de la lista
+    //El metodo recibe un entero que representa la edad a insertar
+    public boolean insertList(int age) throws Exception { 
+        
+        //Variable de tipo booleano para verificar si se logro insertar el nodo
         boolean result = true;
 
+        //Bloque try-catch para manejar excepciones
         try {
+            //Se crea un nuevo nodo
             Node newNode = new Node();
-            newNode.setInfo(age);
+
+            //Se asigna la edad al nodo
+            newNode.setInfo(age);            
+            //Se asigna el siguiente nodo como nulo
             newNode.setNextPte(null);
 
+            //Si la lista esta vacia
+            //Se asigna el nuevo nodo al primer puntero de la lista
             if (this.empty()) {
                 this.firstPte = newNode;
             } else {
@@ -31,17 +45,31 @@ public class List {
                 this.firstPte = newNode;
             }
 
+            //Se asigna el nodo actual al primer nodo de la lista
             this.currentPte = this.firstPte;
 
+            //Se retorna el valor de la variable result
             return result;
+
+        //Se captura la excepcion y se lanza un mensaje
+        //Se lanza una excepcion
         } catch (Exception e) {
             throw new Exception("No se logro ingresar nodo al inicio de la lista!...");
         }
     }
 
+    //Metodo para recorrer la lista de forma iterativa
+    //El metodo recibe un booleano que indica si es la primera vez que se recorre la lista
     public int iteratorTravel(boolean first) throws Exception {
+
+        //Variable de tipo entero para almacenar la informacion del nodo
         int info = 0;
+
+        //Bloque try-catch para manejar excepciones
         try {
+
+            //Si la lista esta vacia
+            //Se retorna la variable info
             if (this.empty()) {
                 return info;
             } else {
