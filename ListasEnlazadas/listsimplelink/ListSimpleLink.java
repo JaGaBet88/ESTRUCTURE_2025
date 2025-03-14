@@ -165,8 +165,7 @@ public class ListSimpleLink {
             do{
                 System.out.println("\n¿Desea ingresar otro número? (S/N): ");
                 opcInsert = scan.next().toUpperCase().charAt(0);
-            }while(opcInsert !='S' || opcInsert !='N');
+            }while(opcInsert !='S' && opcInsert !='N');
         }while (opcInsert == 'S');
-            
         }
 }
