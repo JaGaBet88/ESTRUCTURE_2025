@@ -5,7 +5,7 @@ import model.Node;
 public class List {
 
     //Atributos tipo nodo privados
-    private Node firstPte;
+    private Node firstPte; //Primer puntero
     private Node currentPte;
 
     //Constructor de la clase
