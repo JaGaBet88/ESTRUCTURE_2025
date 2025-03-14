@@ -90,4 +90,35 @@ public class List {
             throw new Exception("No se logro recorrer la lista!...");
         }
     }
+
+
+    public boolean insertAtEnd(int value) throws Exception{
+
+        try {
+
+        //Crea el nuevo nodo
+        Node newNode = new Node();
+        newNode.setInfo(value);
+        newNode.setNextPte(null);
+
+        //Si la lista está vacia, el nuevo nodo será el primer nodo.
+        if (this.empty()) {
+            this.firstPte = newNode;
+        }else{
+            //Buscar el último nodo
+            Node temp = this.firstPte;
+            while (temp.getNextPte() != null) {
+                temp = temp.getNextPte();
+            }
+            //Asignar el nuevo nodo como el siguiente del último nodo
+            temp.setNextPte(newNode);
+        }
+
+        return true;
+
+        } catch (Exception e) {
+            throw new Exception("Error al ingresar el dato al final");
+        }
+
+    }
 }
