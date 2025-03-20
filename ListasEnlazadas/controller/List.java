@@ -4,9 +4,15 @@ import model.Node;
 
 public class List {
 
+<<<<<<< HEAD
     // Atributos de la clase
     private Node firstPte; // Apuntador al primer nodo de la lista
     private Node currentPte; // Apuntador al nodo actual de la lista
+=======
+    //Atributos tipo nodo privados
+    private Node firstPte; //Primer puntero
+    private Node currentPte;
+>>>>>>> e28c931c76c197bbb454af0c300fc980d6418e94
 
     // Constructor de la clase
     public List() {
