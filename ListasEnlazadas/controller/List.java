@@ -4,40 +4,30 @@ import model.Node;
 
 public class List {
 
-    //Atributos tipo nodo privados
-    private Node firstPte;
-    private Node currentPte;
+    // Atributos de la clase
+    private Node firstPte; // Apuntador al primer nodo de la lista
+    private Node currentPte; // Apuntador al nodo actual de la lista
 
-    //Constructor de la clase
+    // Constructor de la clase
     public List() {
-        this.firstPte = null;
-        this.currentPte = null;
+        this.firstPte = null; // Al inicio la lista está vacía
+        this.currentPte = null; // Al inicio la lista está vacía
     }
 
-    //Metodo privado para verificar si la lista esta vacia
+    // Métodos de la clase para validar si la lista está vacía
     private boolean empty() {
-        return this.firstPte == null;
+        return this.firstPte == null; // Si el primer nodo es nulo, la lista está vacía
     }
 
-    //Metodo para insertar un nodo al inicio de la lista
-    //El metodo recibe un entero que representa la edad a insertar
-    public boolean insertList(int age) throws Exception { 
-        
-        //Variable de tipo booleano para verificar si se logro insertar el nodo
-        boolean result = true;
+    public boolean insertList(int age) throws Exception {
+        boolean result = true; // Variable para validar si se ingresó correctamente el nodo
 
-        //Bloque try-catch para manejar excepciones
         try {
-            //Se crea un nuevo nodo
             Node newNode = new Node();
 
-            //Se asigna la edad al nodo
-            newNode.setInfo(age);            
-            //Se asigna el siguiente nodo como nulo
+            newNode.setInfo(age);
             newNode.setNextPte(null);
 
-            //Si la lista esta vacia
-            //Se asigna el nuevo nodo al primer puntero de la lista
             if (this.empty()) {
                 this.firstPte = newNode;
             } else {
@@ -45,31 +35,17 @@ public class List {
                 this.firstPte = newNode;
             }
 
-            //Se asigna el nodo actual al primer nodo de la lista
             this.currentPte = this.firstPte;
 
-            //Se retorna el valor de la variable result
-            return result;
-
-        //Se captura la excepcion y se lanza un mensaje
-        //Se lanza una excepcion
+            return result; // Se ingresó correctamente el nodo
         } catch (Exception e) {
             throw new Exception("No se logro ingresar nodo al inicio de la lista!...");
         }
     }
 
-    //Metodo para recorrer la lista de forma iterativa
-    //El metodo recibe un booleano que indica si es la primera vez que se recorre la lista
     public int iteratorTravel(boolean first) throws Exception {
-
-        //Variable de tipo entero para almacenar la informacion del nodo
         int info = 0;
-
-        //Bloque try-catch para manejar excepciones
         try {
-
-            //Si la lista esta vacia
-            //Se retorna la variable info
             if (this.empty()) {
                 return info;
             } else {
@@ -91,34 +67,94 @@ public class List {
         }
     }
 
+    public boolean destroy() {
+        if (!this.empty()) {
+            this.currentPte = this.firstPte;
 
-    public boolean insertAtEnd(int value) throws Exception{
-
-        try {
-
-        //Crea el nuevo nodo
-        Node newNode = new Node();
-        newNode.setInfo(value);
-        newNode.setNextPte(null);
-
-        //Si la lista está vacia, el nuevo nodo será el primer nodo.
-        if (this.empty()) {
-            this.firstPte = newNode;
-        }else{
-            //Buscar el último nodo
-            Node temp = this.firstPte;
-            while (temp.getNextPte() != null) {
-                temp = temp.getNextPte();
+            while (this.currentPte != null) {
+                this.currentPte = this.currentPte.getNextPte();
+                this.firstPte.setNextPte(null);
+                this.firstPte = this.currentPte;
             }
-            //Asignar el nuevo nodo como el siguiente del último nodo
-            temp.setNextPte(newNode);
+            return true;
+        } else {
+            return false;
         }
+    }
 
-        return true;
+    public boolean insertAtEnd(int value) throws Exception {
+        boolean result = true; // Variable para validar si se ingresó correctamente el nodo
+        try {
+            Node newNode = new Node();
 
+            newNode.setInfo(value);
+            newNode.setNextPte(null); // Porque será el último nodo.
+
+            if (this.empty()) {
+                this.firstPte = newNode;
+            } else {
+                // Recorro la lista hasta el último nodo
+                this.currentPte = this.firstPte;
+                while (this.currentPte.getNextPte() != null) {
+                    this.currentPte = this.currentPte.getNextPte();
+                }
+
+                this.currentPte.setNextPte(newNode);
+            }
+            return result; // Se ingresó correctamente el nodo
         } catch (Exception e) {
             throw new Exception("Error al ingresar el dato al final");
         }
+    }
 
+    public boolean deleteLastNode() throws Exception {
+        try {
+            if (this.empty()) {
+                return false;
+            } else {
+                this.currentPte = this.firstPte;
+                if (this.currentPte != this.firstPte) {
+                    Node previewPte = null;
+                    do {
+                        previewPte = this.currentPte;
+                        this.currentPte = this.currentPte.getNextPte();
+                    } while (this.currentPte != this.firstPte);
+
+                    previewPte.setNextPte(null);
+                    this.currentPte = this.firstPte;
+                    previewPte = null;
+                } else {
+                    this.currentPte = null;
+                    this.firstPte = null;
+                }
+                return true;
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al eliminar el último nodo");
+        }
+    }
+
+    public int deleteSpecificNode(int value) throws Exception {
+        int counTimes = 0, result = 0;
+
+        try {
+            if (this.empty()){
+                return result;
+            }else{
+                result = 200;
+                this.currentPte = this.firstPte;
+                Node previewPte = this.currentPte;
+                Node temPte = null;
+
+                while (this.currentPte != null) {
+                    if () {
+                        
+                    }
+                    
+                }
+            }
+        } catch (Exception e) {
+            
+        }
     }
 }
