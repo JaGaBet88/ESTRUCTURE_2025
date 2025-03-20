@@ -3,16 +3,10 @@ package controller;
 import model.Node;
 
 public class List {
-
-<<<<<<< HEAD
+    
     // Atributos de la clase
     private Node firstPte; // Apuntador al primer nodo de la lista
     private Node currentPte; // Apuntador al nodo actual de la lista
-=======
-    //Atributos tipo nodo privados
-    private Node firstPte; //Primer puntero
-    private Node currentPte;
->>>>>>> e28c931c76c197bbb454af0c300fc980d6418e94
 
     // Constructor de la clase
     public List() {
@@ -137,30 +131,6 @@ public class List {
             }
         } catch (Exception e) {
             throw new Exception("Error al eliminar el último nodo");
-        }
-    }
-
-    public int deleteSpecificNode(int value) throws Exception {
-        int counTimes = 0, result = 0;
-
-        try {
-            if (this.empty()){
-                return result;
-            }else{
-                result = 200;
-                this.currentPte = this.firstPte;
-                Node previewPte = this.currentPte;
-                Node temPte = null;
-
-                while (this.currentPte != null) {
-                    if () {
-                        
-                    }
-                    
-                }
-            }
-        } catch (Exception e) {
-            
         }
     }
 }
