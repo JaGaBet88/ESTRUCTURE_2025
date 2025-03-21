@@ -3,7 +3,7 @@ package controller;
 import model.Node;
 
 public class List {
-    
+
     // Atributos de la clase
     private Node firstPte; // Apuntador al primer nodo de la lista
     private Node currentPte; // Apuntador al nodo actual de la lista
@@ -112,23 +112,19 @@ public class List {
             if (this.empty()) {
                 return false;
             } else {
-                this.currentPte = this.firstPte;
-                if (this.currentPte != this.firstPte) {
-                    Node previewPte = null;
-                    do {
-                        previewPte = this.currentPte;
-                        this.currentPte = this.currentPte.getNextPte();
-                    } while (this.currentPte != this.firstPte);
-
-                    previewPte.setNextPte(null);
-                    this.currentPte = this.firstPte;
-                    previewPte = null;
-                } else {
-                    this.currentPte = null;
+                //Validar si solo hay un nodo en la lista
+                if (this.firstPte.getNextPte() == null) {
                     this.firstPte = null;
+                    return true;
                 }
-                return true;
-            }
+                    this.currentPte = this.firstPte;
+                    while (this.currentPte.getNextPte().getNextPte() != null) {
+                        this.currentPte = this.currentPte.getNextPte();
+                    }
+
+                    this.currentPte.setNextPte(null);
+                    return true;
+                }
         } catch (Exception e) {
             throw new Exception("Error al eliminar el último nodo");
         }

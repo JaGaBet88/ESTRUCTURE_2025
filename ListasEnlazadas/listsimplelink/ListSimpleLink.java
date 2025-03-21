@@ -15,7 +15,7 @@ public class ListSimpleLink {
         //triggerTravel();
         //destroy();
         insertAtEnd();
-        //deleteLastNode();
+        deleteLastNode();
     }
 
     private static void insertHead() {
