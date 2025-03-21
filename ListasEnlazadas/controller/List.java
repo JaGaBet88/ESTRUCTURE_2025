@@ -113,6 +113,7 @@ public class List {
                 return false;
             } else {
                 //Validar si solo hay un nodo en la lista
+                //Si el siguiente nodo del primero es nulo
                 if (this.firstPte.getNextPte() == null) {
                     this.firstPte = null;
                     return true;
