@@ -12,10 +12,13 @@ public class ListSimpleLink {
     public static void main(String[] args) {
         insertHead();
         iteratorTravel();
-        //triggerTravel();
-        //destroy();
+        triggerTravel();
+        destroy();
         insertAtEnd();
         deleteLastNode();
+        insertAfter();
+        insertBefore();
+        removeAnyNode();
     }
 
     private static void insertHead() {
@@ -98,7 +101,6 @@ public class ListSimpleLink {
     }
 
     private static void insertAtEnd() {
-        char opcInsert;
 
         System.out.println("\nIngresar edad al final de la lista");
 
@@ -140,5 +142,57 @@ public class ListSimpleLink {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public static void removeAnyNode() {
+        System.out.println("\nIngrese la edad que desea eliminar: ");
+        int edad = scan.nextInt();
+
+        try {
+            if (objList.removeAnyNode(edad)) {
+                System.out.println("El nodo fue eliminado correctamente.");
+            } else {
+                System.out.println("El valor no se encontró en la lista.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void insertAfter() {
+        System.out.println("\nIngrese el valor despues del cual quiere insertar: ");
+        int target = scan.nextInt();
+
+        System.out.println("\nIngrese la edad a insertar: ");
+        int newAge = scan.nextInt();
+
+        try {
+            if (objList.insertAfter(target, newAge)) {
+                System.out.println("Nodo insertado correctamente despues de: " + target);
+            } else {
+                System.out.println("No se encontró el nodo con el valor: " + target);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void insertBefore() {
+        System.out.println("Ingrese el valor antes del cual quiere insertar:");
+        int target = scan.nextInt();
+
+        System.out.println("\nIngrese la edad a insertar: ");
+        int newValue = scan.nextInt();
+
+        try {
+            if (objList.insertBefore(target, newValue)) {
+                System.out.println("Nodo insertado correctamente antes de " + target);
+            } else {
+                System.out.println("No se encontró el nodo con el valor " + target);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
