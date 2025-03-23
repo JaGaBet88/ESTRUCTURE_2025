@@ -181,7 +181,7 @@ public class ListSimpleLink {
             }
 
             do {
-                System.out.println("\n¿Desea realizar un nuevo intento? (S/N): ");
+                System.out.println("\n¿Desea realizar un nuevo intento o agregar un nuevo registro? (S/N): ");
                 opcInsert = scan.next().toUpperCase().charAt(0);
             } while (opcInsert != 'S' && opcInsert != 'N');
 
@@ -193,26 +193,28 @@ public class ListSimpleLink {
         do {
             System.out.println("Ingrese el valor antes del cual quiere insertar:");
             int target = scan.nextInt();
-
-            System.out.println("\nIngrese la edad a insertar: ");
+    
+            System.out.println("Ingrese la edad a insertar: ");
             int newValue = scan.nextInt();
-
+    
             try {
                 if (objList.insertBefore(target, newValue)) {
                     System.out.println("Nodo insertado correctamente antes de " + target);
-                    iteratorTravel();
+                    iteratorTravel(); // Muestra la lista actual
                 } else {
                     System.out.println("No se encontró el nodo con el valor " + target);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            
+    
+            // Solo aquí preguntas si desea repetir el proceso
             do {
-                System.out.println("\n¿Desea realizar un nuevo intento? (S/N): ");
+                System.out.println("\n¿Desea realizar un nuevo intento o agregar un nuevo registro? (S/N): ");
                 opcInsert = scan.next().toUpperCase().charAt(0);
             } while (opcInsert != 'S' && opcInsert != 'N');
-
+    
         } while (opcInsert == 'S');
     }
+    
 }
