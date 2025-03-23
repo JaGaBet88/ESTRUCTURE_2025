@@ -11,14 +11,14 @@ public class ListSimpleLink {
 
     public static void main(String[] args) {
         insertHead();
-        iteratorTravel();
-        triggerTravel();
-        destroy();
         insertAtEnd();
-        deleteLastNode();
         insertAfter();
         insertBefore();
+        iteratorTravel();
+        triggerTravel();
+        deleteLastNode();
         removeAnyNode();
+        destroy();
     }
 
     private static void insertHead() {
@@ -151,6 +151,7 @@ public class ListSimpleLink {
         try {
             if (objList.removeAnyNode(edad)) {
                 System.out.println("El nodo fue eliminado correctamente.");
+                iteratorTravel();
             } else {
                 System.out.println("El valor no se encontró en la lista.");
             }
@@ -160,39 +161,58 @@ public class ListSimpleLink {
     }
 
     public static void insertAfter() {
-        System.out.println("\nIngrese el valor despues del cual quiere insertar: ");
-        int target = scan.nextInt();
+        char opcInsert;
+        do {
+            System.out.println("\nIngrese el valor después del cual quiere insertar: ");
+            int target = scan.nextInt();
 
-        System.out.println("\nIngrese la edad a insertar: ");
-        int newAge = scan.nextInt();
+            System.out.println("Ingrese la edad a insertar: ");
+            int newAge = scan.nextInt();
 
-        try {
-            if (objList.insertAfter(target, newAge)) {
-                System.out.println("Nodo insertado correctamente despues de: " + target);
-            } else {
-                System.out.println("No se encontró el nodo con el valor: " + target);
+            try {
+                if (objList.insertAfter(target, newAge)) {
+                    System.out.println("Nodo insertado correctamente después de: " + target);
+                    iteratorTravel(); // Muestra la lista
+                } else {
+                    System.out.println("No se encontró el nodo con el valor: " + target);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
+            do {
+                System.out.println("\n¿Desea realizar un nuevo intento? (S/N): ");
+                opcInsert = scan.next().toUpperCase().charAt(0);
+            } while (opcInsert != 'S' && opcInsert != 'N');
+
+        } while (opcInsert == 'S');
     }
 
     public static void insertBefore() {
-        System.out.println("Ingrese el valor antes del cual quiere insertar:");
-        int target = scan.nextInt();
+        char opcInsert;
+        do {
+            System.out.println("Ingrese el valor antes del cual quiere insertar:");
+            int target = scan.nextInt();
 
-        System.out.println("\nIngrese la edad a insertar: ");
-        int newValue = scan.nextInt();
+            System.out.println("\nIngrese la edad a insertar: ");
+            int newValue = scan.nextInt();
 
-        try {
-            if (objList.insertBefore(target, newValue)) {
-                System.out.println("Nodo insertado correctamente antes de " + target);
-            } else {
-                System.out.println("No se encontró el nodo con el valor " + target);
+            try {
+                if (objList.insertBefore(target, newValue)) {
+                    System.out.println("Nodo insertado correctamente antes de " + target);
+                    iteratorTravel();
+                } else {
+                    System.out.println("No se encontró el nodo con el valor " + target);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+            
+            do {
+                System.out.println("\n¿Desea realizar un nuevo intento? (S/N): ");
+                opcInsert = scan.next().toUpperCase().charAt(0);
+            } while (opcInsert != 'S' && opcInsert != 'N');
 
+        } while (opcInsert == 'S');
     }
 }
