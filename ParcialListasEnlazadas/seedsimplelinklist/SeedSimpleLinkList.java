@@ -8,6 +8,8 @@ public class SeedSimpleLinkList {
     static Scanner scan = new Scanner(System.in);
     static SimpleList objSimpleList = new SimpleList();
 
+    //Nombre estudiante: Jairo Alberto Gallego Betancur
+
     public static void main(String[] args) {
         insertHead();      // Insertar notas
         objSimpleList.showList();  // Mostrar la lista de notas

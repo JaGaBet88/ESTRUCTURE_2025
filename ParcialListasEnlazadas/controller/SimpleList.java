@@ -16,30 +16,28 @@ public class SimpleList {
         return this.firstPte == null;
     }
 
-    public boolean insertList(double age) throws Exception {
-        boolean result = true;
-
+    // Insertar nota al inicio de la lista
+    public boolean insertList(double nota) throws Exception {
         try {
             Node newNode = new Node();
-            newNode.setInfo(age);
-            newNode.setNextPte(null);
+            newNode.setInfo(nota); // Almacena la nota en el nodo
+            newNode.setNextPte(null); // El siguiente nodo es nulo
 
             if (this.empty()) {
-                this.firstPte = newNode;
+                this.firstPte = newNode; // El primer nodo es el nuevo nodo
             } else {
                 newNode.setNextPte(this.firstPte);
                 this.firstPte = newNode;
             }
 
             this.currentPte = this.firstPte;
-
-            return result;
+            return true;
         } catch (Exception e) {
-            throw new Exception("No se logro ingresar nodo al inicio de la lista!...");
+            throw new Exception("No se logró ingresar la nota a la lista.");
         }
     }
 
-    //Mostrar el promedio de las notas que se encuentran sobre la lista
+    // Mostrar el promedio de las notas
     public double showAverage() {
         double sum = 0;
         int count = 0;
@@ -49,6 +47,16 @@ public class SimpleList {
             count++;
             this.currentPte = this.currentPte.getNextPte();
         }
-        return sum / count;
+        return (count > 0) ? sum / count : 0; // Retorna el promedio de las notas
+    }
+
+    // Mostrar todas las notas de la lista
+    public void showList() {
+        this.currentPte = this.firstPte;
+        System.out.println("\nNotas almacenadas en la lista:");
+        while (this.currentPte != null) {
+            System.out.println(this.currentPte.getInfo());
+            this.currentPte = this.currentPte.getNextPte();
+        }
     }
 }
