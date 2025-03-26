@@ -20,11 +20,11 @@ public class SimpleList {
     public boolean insertList(double nota) throws Exception {
         try {
             Node newNode = new Node();
-            newNode.setInfo(nota); // Almacena la nota en el nodo
-            newNode.setNextPte(null); // El siguiente nodo es nulo
+            newNode.setInfo(nota);
+            newNode.setNextPte(null);
 
             if (this.empty()) {
-                this.firstPte = newNode; // El primer nodo es el nuevo nodo
+                this.firstPte = newNode;
             } else {
                 newNode.setNextPte(this.firstPte);
                 this.firstPte = newNode;
@@ -34,6 +34,28 @@ public class SimpleList {
             return true;
         } catch (Exception e) {
             throw new Exception("No se logró ingresar la nota a la lista.");
+        }
+    }
+
+    // Insertar nota al final de la lista
+    public boolean insertEnd(double nota) throws Exception {
+        try {
+            Node newNode = new Node();
+            newNode.setInfo(nota);
+            newNode.setNextPte(null);
+
+            if (this.empty()) {
+                this.firstPte = newNode;
+            } else {
+                Node aux = this.firstPte;
+                while (aux.getNextPte() != null) {
+                    aux = aux.getNextPte();
+                }
+                aux.setNextPte(newNode);
+            }
+            return true;
+        } catch (Exception e) {
+            throw new Exception("No se logró ingresar la nota al final.");
         }
     }
 
@@ -47,7 +69,7 @@ public class SimpleList {
             count++;
             this.currentPte = this.currentPte.getNextPte();
         }
-        return (count > 0) ? sum / count : 0; // Retorna el promedio de las notas
+        return (count > 0) ? sum / count : 0;
     }
 
     // Mostrar todas las notas de la lista
@@ -60,3 +82,7 @@ public class SimpleList {
         }
     }
 }
+
+
+
+
