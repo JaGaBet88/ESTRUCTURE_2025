@@ -47,11 +47,11 @@ public class SimpleList {
             if (this.empty()) {
                 this.firstPte = newNode;
             } else {
-                Node aux = this.firstPte;
-                while (aux.getNextPte() != null) {
-                    aux = aux.getNextPte();
+                this.currentPte = this.firstPte;
+                while (this.currentPte.getNextPte() != null) {
+                    this.currentPte = this.currentPte.getNextPte();
                 }
-                aux.setNextPte(newNode);
+                this.currentPte.setNextPte(newNode);
             }
             return true;
         } catch (Exception e) {
