@@ -18,12 +18,15 @@ public class DoublyLinkedLists {
             System.out.println("2. Mostrar el contenido de las edades");
             System.out.println("3. Mostrar el contenido de forma recursiva");
             System.out.println("4. Destruir la lista doblemente ligada");
-            System.out.println("5. Para Salir");
+            System.out.println("5. Eliminar el primer nodo de la lista");
+            System.out.println("6. Eliminar el ulitmo nodo de la lista");
+            System.out.println("7. Eliminar un nodo especifico de la lista");
+            System.out.println("8. Para Salir");
 
             do {
                 System.out.println("\nIngrese la opcion: ");
                 opc = scan.nextByte();
-            } while (opc > 5);
+            } while (opc > 8);
 
             switch (opc) {
                 case 1: {
@@ -41,13 +44,25 @@ public class DoublyLinkedLists {
                 case 4: {
                     destroy();
                     break;
-                }                
+                }
+                case 5: {
+                    deleteFirst();
+                    break;
+                }
+                case 6: {
+                    deleteLast();
+                    break;
+                }
+                case 7: {
+                    deleteSpecifictNode();
+                    break;
+                }
                 default: {
                     break;
                 }
             }
 
-        } while (opc != 5);
+        } while (opc != 8);
     }
 
     private static void headInsert() {
@@ -118,14 +133,64 @@ public class DoublyLinkedLists {
     }
 
     private static void destroy() {
-        try{
-            if ( objDoubleList.destroy() ) {
+        try {
+            if (objDoubleList.destroy()) {
                 System.out.println("La lista doblemente ligada ha sido destruida!...");
             } else {
                 System.out.println("La lista doblemente ligada esta vacia!...");
             }
-            
-        }catch( Exception e ){ System.out.println(e.getMessage()); }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    private static void deleteFirst() {
+        try {
+            if (objDoubleList.deleteFirst()) {
+                System.out.println("Se eliminó el primer nodo de la lista!...");
+                iteratorTravel();
+            } else {
+                System.out.println("La lista esta vacia!....");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void deleteLast() {
+        try {
+            if (objDoubleList.deleteLast()) {
+                System.out.println("Se eliminó el ultimo nodo de la lista!...");
+                iteratorTravel();
+            } else {
+                System.out.println("La lista esta vacia!....");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private static void deleteSpecifictNode() {
+        System.out.println("\nEliminar un nodo especifico de la lista");
+
+        System.out.println("\nIngrese un dato a eliminar de la lista: ");
+        int value = scan.nextInt();
+
+        try {
+            int result = objDoubleList.deleteSpecifictNode(value);
+
+            if (result == value) {
+                System.out.println("\nEl dato se ha eliminado de la lista!...");
+                iteratorTravel();
+            } else if (result == 200) {
+                System.out.println("\nEl dato no se encontro en la lista!...");
+            } else {
+                System.out.println("\nLa lista esta vacia!...");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }    
 
 }

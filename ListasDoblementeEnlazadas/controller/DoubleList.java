@@ -87,4 +87,116 @@ public class DoubleList {
         }
     }
 
+    public boolean deleteFirst() throws Exception {
+        try {
+            this.currentPte = this.firstPte;
+
+            if (!this.empty()) {
+                if (this.firstPte == this.lastPte) {
+                    this.lastPte = this.currentPte = this.firstPte = null;
+                } else {
+                    this.firstPte = this.firstPte.getNextPte();
+                    this.firstPte.setPrevPte(null);
+                    this.currentPte.setNextPte(null);
+                    this.currentPte = this.firstPte;
+                }
+
+                return true;
+
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            throw new Exception("No se logro destruir la lista doblemene ligada! ...");
+        }
+    }
+
+    public boolean deleteLast() throws Exception {
+        try {
+            this.currentPte = this.firstPte;
+
+            if (!this.empty()) {
+                if (this.firstPte == this.lastPte) {
+                    this.lastPte = this.currentPte = this.firstPte = null;
+                } else {
+                    while (this.currentPte.getNextPte() != null) {
+                        this.currentPte = this.currentPte.getNextPte();
+                    }
+
+                    this.lastPte = this.lastPte.getPrevPte();
+                    this.currentPte.setPrevPte(null);
+                    this.lastPte.setNextPte(null);
+                    this.currentPte = this.lastPte;
+                }
+
+                return true;
+
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            throw new Exception("No se logro eliminar el ulitmo nodo de la lista doblemene ligada! ...");
+        }
+    }
+
+    public int deleteSpecifictNode(int value) throws Exception {
+        int counTimes = 0, result = 0;
+
+        try {
+            if (this.empty()) {
+                return result;
+            } else {
+                result = 200;
+//                this.currentPte = this.firstPte;
+//                Node previewPte = this.currentPte;
+                Node previewPte = this.currentPte = this.firstPte;                
+                Node temPte = null;
+
+                while (this.currentPte != null) {
+                    if (this.firstPte.getInfo() == value) {
+                        this.firstPte = this.firstPte.getNextPte();
+                        if( this.lastPte.getPrevPte() == null && this.lastPte.getNextPte() == null ){
+                            this.lastPte = null;
+                        }
+                        result = value;
+                    } else if (this.currentPte.getInfo() == value) {
+                        previewPte.setNextPte(this.currentPte.getNextPte());
+                        temPte = this.currentPte;
+                        if (this.currentPte == this.lastPte) {
+                            this.lastPte.setPrevPte(null);
+                            this.lastPte = this.currentPte = previewPte;
+                        } else {
+                            (this.currentPte.getNextPte()).setPrevPte(this.currentPte.getPrevPte());
+                            this.currentPte = previewPte;
+                            temPte.setPrevPte(null);
+                            temPte.setNextPte(null);
+//                        temPte = null;
+                        }
+                        result = value;
+                    }
+
+                    if (this.currentPte != null) {
+                        this.currentPte = this.currentPte.getNextPte();
+                        counTimes++;
+                    }
+
+                    if (counTimes > 1 && temPte == null) {
+                        previewPte = previewPte.getNextPte();
+                    }
+
+                    if (temPte != null) {
+                        temPte.setPrevPte(null);
+                        temPte.setNextPte(null);
+                    }
+                }
+                previewPte = null;
+                temPte = null;
+                return result;
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al eliminar un nodo especifico de la lista!...");
+        }
+    }
+
+    
 }
