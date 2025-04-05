@@ -140,63 +140,122 @@ public class DoubleList {
     }
 
     public int deleteSpecifictNode(int value) throws Exception {
-        int counTimes = 0, result = 0;
-
         try {
             if (this.empty()) {
-                return result;
-            } else {
-                result = 200;
-//                this.currentPte = this.firstPte;
-//                Node previewPte = this.currentPte;
-                Node previewPte = this.currentPte = this.firstPte;                
-                Node temPte = null;
-
-                while (this.currentPte != null) {
-                    if (this.firstPte.getInfo() == value) {
-                        this.firstPte = this.firstPte.getNextPte();
-                        if( this.lastPte.getPrevPte() == null && this.lastPte.getNextPte() == null ){
-                            this.lastPte = null;
-                        }
-                        result = value;
-                    } else if (this.currentPte.getInfo() == value) {
-                        previewPte.setNextPte(this.currentPte.getNextPte());
-                        temPte = this.currentPte;
-                        if (this.currentPte == this.lastPte) {
-                            this.lastPte.setPrevPte(null);
-                            this.lastPte = this.currentPte = previewPte;
-                        } else {
-                            (this.currentPte.getNextPte()).setPrevPte(this.currentPte.getPrevPte());
-                            this.currentPte = previewPte;
-                            temPte.setPrevPte(null);
-                            temPte.setNextPte(null);
-//                        temPte = null;
-                        }
-                        result = value;
-                    }
-
-                    if (this.currentPte != null) {
-                        this.currentPte = this.currentPte.getNextPte();
-                        counTimes++;
-                    }
-
-                    if (counTimes > 1 && temPte == null) {
-                        previewPte = previewPte.getNextPte();
-                    }
-
-                    if (temPte != null) {
-                        temPte.setPrevPte(null);
-                        temPte.setNextPte(null);
-                    }
-                }
-                previewPte = null;
-                temPte = null;
-                return result;
+                return 0;
             }
+    
+            Node temp = this.firstPte;
+    
+            while (temp != null) {
+                if (temp.getInfo() == value) {
+    
+                    // Si es el único nodo
+                    if (temp == firstPte && temp == lastPte) {
+                        firstPte = lastPte = currentPte = null;
+                    }
+    
+                    // Si es el primer nodo
+                    else if (temp == firstPte) {
+                        firstPte = firstPte.getNextPte();
+                        firstPte.setPrevPte(null);
+                    }
+    
+                    // Si es el último nodo
+                    else if (temp == lastPte) {
+                        lastPte = lastPte.getPrevPte();
+                        lastPte.setNextPte(null);
+                    }
+    
+                    // Nodo intermedio
+                    else {
+                        temp.getPrevPte().setNextPte(temp.getNextPte());
+                        temp.getNextPte().setPrevPte(temp.getPrevPte());
+                    }
+    
+                    // Limpieza opcional
+                    temp.setPrevPte(null);
+                    temp.setNextPte(null);
+    
+                    return value; // éxito
+                }
+    
+                temp = temp.getNextPte();
+            }
+    
+            return 200; // No se encontró
         } catch (Exception e) {
-            throw new Exception("Error al eliminar un nodo especifico de la lista!...");
+            throw new Exception("Error al eliminar un nodo específico de la lista!...");
+        }
+    }
+    
+
+    public boolean insertAfter(int targetValue, int newValue) throws Exception {
+        try {
+            if (this.empty())
+                return false;
+
+            this.currentPte = this.firstPte;
+
+            while (this.currentPte != null) {
+                if (this.currentPte.getInfo() == targetValue) {
+                    Node newNode = new Node();
+                    newNode.setInfo(newValue);
+
+                    newNode.setPrevPte(this.currentPte);
+                    newNode.setNextPte(this.currentPte.getNextPte());
+
+                    if (this.currentPte.getNextPte() != null) {
+                        this.currentPte.getNextPte().setPrevPte(newNode);
+                    } else {
+                        // Si es el último nodo
+                        this.lastPte = newNode;
+                    }
+
+                    this.currentPte.setNextPte(newNode);
+                    return true;
+                }
+                this.currentPte = this.currentPte.getNextPte();
+            }
+
+            return false;
+        } catch (Exception e) {
+            throw new Exception("Error al insertar después del nodo!...");
         }
     }
 
-    
+    public boolean insertBefore(int targetValue, int newValue) throws Exception {
+        try {
+            if (this.empty())
+                return false;
+
+            this.currentPte = this.firstPte;
+
+            while (this.currentPte != null) {
+                if (this.currentPte.getInfo() == targetValue) {
+                    Node newNode = new Node();
+                    newNode.setInfo(newValue);
+
+                    newNode.setNextPte(this.currentPte);
+                    newNode.setPrevPte(this.currentPte.getPrevPte());
+
+                    if (this.currentPte.getPrevPte() != null) {
+                        this.currentPte.getPrevPte().setNextPte(newNode);
+                    } else {
+                        // Si es el primer nodo
+                        this.firstPte = newNode;
+                    }
+
+                    this.currentPte.setPrevPte(newNode);
+                    return true;
+                }
+                this.currentPte = this.currentPte.getNextPte();
+            }
+
+            return false;
+        } catch (Exception e) {
+            throw new Exception("Error al insertar antes del nodo!...");
+        }
+    }
+
 }

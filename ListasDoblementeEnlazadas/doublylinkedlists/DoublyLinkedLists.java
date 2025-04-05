@@ -21,12 +21,14 @@ public class DoublyLinkedLists {
             System.out.println("5. Eliminar el primer nodo de la lista");
             System.out.println("6. Eliminar el ulitmo nodo de la lista");
             System.out.println("7. Eliminar un nodo especifico de la lista");
-            System.out.println("8. Para Salir");
+            System.out.println("8. Insertar un nodo después de un valor");
+            System.out.println("9. Insertar un nodo antes de un valor");
+            System.out.println("10. Para Salir");
 
             do {
                 System.out.println("\nIngrese la opcion: ");
                 opc = scan.nextByte();
-            } while (opc > 8);
+            } while (opc > 10);
 
             switch (opc) {
                 case 1: {
@@ -57,12 +59,20 @@ public class DoublyLinkedLists {
                     deleteSpecifictNode();
                     break;
                 }
+                case 8: {
+                    insertAfter();
+                    break;
+                }
+                case 9: {
+                    insertBefore();
+                    break;
+                }
                 default: {
                     break;
                 }
             }
 
-        } while (opc != 8);
+        } while (opc != 10);
     }
 
     private static void headInsert() {
@@ -170,7 +180,7 @@ public class DoublyLinkedLists {
             System.out.println(e.getMessage());
         }
     }
-    
+
     private static void deleteSpecifictNode() {
         System.out.println("\nEliminar un nodo especifico de la lista");
 
@@ -191,6 +201,48 @@ public class DoublyLinkedLists {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }    
+    }
+
+    private static void insertAfter() {
+        System.out.println("\nInsertar un nodo después de un valor específico");
+
+        System.out.print("Ingrese el valor objetivo: ");
+        int target = scan.nextInt();
+
+        System.out.print("Ingrese el nuevo valor a insertar: ");
+        int value = scan.nextInt();
+
+        try {
+            if (objDoubleList.insertAfter(target, value)) {
+                System.out.println("El nodo se insertó correctamente!");
+                iteratorTravel();
+            } else {
+                System.out.println("El valor objetivo no se encontró en la lista.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void insertBefore() {
+        System.out.println("\nInsertar un nodo antes de un valor específico");
+
+        System.out.print("Ingrese el valor objetivo: ");
+        int target = scan.nextInt();
+
+        System.out.print("Ingrese el nuevo valor a insertar: ");
+        int value = scan.nextInt();
+
+        try {
+            if (objDoubleList.insertBefore(target, value)) {
+                System.out.println("El nodo se insertó correctamente!");
+                iteratorTravel();
+            } else {
+                System.out.println("El valor objetivo no se encontró en la lista.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
 }
