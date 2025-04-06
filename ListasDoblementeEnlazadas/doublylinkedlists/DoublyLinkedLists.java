@@ -23,12 +23,13 @@ public class DoublyLinkedLists {
             System.out.println("7. Eliminar un nodo especifico de la lista");
             System.out.println("8. Insertar un nodo después de un valor");
             System.out.println("9. Insertar un nodo antes de un valor");
-            System.out.println("10. Para Salir");
+            System.out.println("10. Convertir lista a circular");
+            System.out.println("11. Para Salir");
 
             do {
                 System.out.println("\nIngrese la opcion: ");
                 opc = scan.nextByte();
-            } while (opc > 10);
+            } while (opc > 11);
 
             switch (opc) {
                 case 1: {
@@ -67,12 +68,16 @@ public class DoublyLinkedLists {
                     insertBefore();
                     break;
                 }
+                case 10: {
+                    makeCircularList();
+                    break;
+                }
                 default: {
                     break;
                 }
             }
 
-        } while (opc != 10);
+        } while (opc != 11);
     }
 
     private static void headInsert() {
@@ -87,6 +92,7 @@ public class DoublyLinkedLists {
             try {
                 if (objDoubleList.headInsert(age)) {
                     System.out.println("Edad ingresada correctamente! ...");
+                    iteratorTravel();
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -100,7 +106,7 @@ public class DoublyLinkedLists {
         } while (sw == 'S');
     }
 
-    private static void iteratorTravel() {
+    /*private static void iteratorTravel() {
         System.out.println("\nMostrar el contenido de la lista");
         try {
             byte count = 1;
@@ -115,9 +121,18 @@ public class DoublyLinkedLists {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
+    }*/
 
-    private static void triggerTravel() {
+    private static void iteratorTravel() {
+        System.out.println("\nMostrar el contenido de la lista");
+        try {
+            objDoubleList.displayAll();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }    
+
+    /*private static void triggerTravel() {
         System.out.println("\nMostrando Datos de Forma Recursiva");
         boolean first = true;
         try {
@@ -127,9 +142,17 @@ public class DoublyLinkedLists {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
+    }*/
 
-    private static void recursiveTravel(int data, byte count) {
+    private static void triggerTravel() {
+        try {
+            objDoubleList.recursiveDisplay();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }    
+
+    /*private static void recursiveTravel(int data, byte count) {
         if (data != 0) {
             System.out.println("El dato del nodo " + count + " es : " + data);
             count++;
@@ -140,7 +163,7 @@ public class DoublyLinkedLists {
                 System.out.println("Error: " + e.getMessage());
             }
         }
-    }
+    }*/
 
     private static void destroy() {
         try {
@@ -245,4 +268,12 @@ public class DoublyLinkedLists {
         }
     }
 
+    private static void makeCircularList() {
+        try {
+            objDoubleList.makeCircular();
+            iteratorTravel();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }

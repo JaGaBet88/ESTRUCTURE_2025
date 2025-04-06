@@ -39,7 +39,7 @@ public class DoubleList {
         }
     }
 
-    public int iteratorTravel(boolean first) throws Exception {
+    /*public int iteratorTravel(boolean first) throws Exception {
         int info = 0;
         try {
             if (this.empty()) {
@@ -61,8 +61,47 @@ public class DoubleList {
         } catch (Exception e) {
             throw new Exception("No se logro recorrer la lista!...");
         }
+    }*/
+
+    public void displayAll() throws Exception {
+        try {
+            if (this.empty()) {
+                System.out.println("La lista está vacía.");
+                return;
+            }
+    
+            this.currentPte = this.firstPte;
+            byte count = 1;
+    
+            do {
+                System.out.println("La edad " + count + " es : " + this.currentPte.getInfo());
+                this.currentPte = this.currentPte.getNextPte();
+                count++;
+            } while (this.currentPte != null && this.currentPte != this.firstPte); // Para circular y normal
+        } catch (Exception e) {
+            throw new Exception("Error al recorrer la lista...");
+        }
     }
 
+    public void recursiveDisplay() throws Exception {
+        if (this.empty()) {
+            System.out.println("La lista está vacía.");
+            return;
+        }
+    
+        System.out.println("\nMostrando Datos de Forma Recursiva:");
+        recursivePrint(this.firstPte, this.firstPte, (byte) 1, true);
+    }
+    
+    private void recursivePrint(Node current, Node start, byte count, boolean firstCall) {
+        if (current == null || (!firstCall && current == start)) {
+            return;
+        }
+    
+        System.out.println("El dato del nodo " + count + " es : " + current.getInfo());
+        recursivePrint(current.getNextPte(), start, (byte)(count + 1), false);
+    }    
+    
     public boolean destroy() throws Exception {
         try {
             if (!this.empty()) {
@@ -144,51 +183,50 @@ public class DoubleList {
             if (this.empty()) {
                 return 0;
             }
-    
+
             Node temp = this.firstPte;
-    
+
             while (temp != null) {
                 if (temp.getInfo() == value) {
-    
+
                     // Si es el único nodo
                     if (temp == firstPte && temp == lastPte) {
                         firstPte = lastPte = currentPte = null;
                     }
-    
+
                     // Si es el primer nodo
                     else if (temp == firstPte) {
                         firstPte = firstPte.getNextPte();
                         firstPte.setPrevPte(null);
                     }
-    
+
                     // Si es el último nodo
                     else if (temp == lastPte) {
                         lastPte = lastPte.getPrevPte();
                         lastPte.setNextPte(null);
                     }
-    
+
                     // Nodo intermedio
                     else {
                         temp.getPrevPte().setNextPte(temp.getNextPte());
                         temp.getNextPte().setPrevPte(temp.getPrevPte());
                     }
-    
+
                     // Limpieza opcional
                     temp.setPrevPte(null);
                     temp.setNextPte(null);
-    
+
                     return value; // éxito
                 }
-    
+
                 temp = temp.getNextPte();
             }
-    
+
             return 200; // No se encontró
         } catch (Exception e) {
             throw new Exception("Error al eliminar un nodo específico de la lista!...");
         }
     }
-    
 
     public boolean insertAfter(int targetValue, int newValue) throws Exception {
         try {
@@ -258,4 +296,46 @@ public class DoubleList {
         }
     }
 
+    public boolean insertLast(int value) throws Exception {
+        try {
+            Node newNode = new Node();
+            newNode.setInfo(value);
+            newNode.setNextPte(null); // ya que será el último nodo
+
+            if (this.empty()) {
+                // Si la lista está vacía, el nuevo nodo es el único nodo
+                this.firstPte = this.lastPte = this.currentPte = newNode;
+                newNode.setPrevPte(null);
+            } else {
+                // Si ya hay nodos, lo enlazamos al final
+                newNode.setPrevPte(this.lastPte);
+                this.lastPte.setNextPte(newNode);
+                this.lastPte = newNode; // Actualizamos el puntero al último nodo
+            }
+
+            return true;
+        } catch (Exception e) {
+            throw new Exception("Error al insertar el nodo al final de la lista.");
+        }
+    }
+
+    public void makeCircular() throws Exception {
+        try {
+            if (!this.empty() && this.firstPte != this.lastPte) {
+                this.firstPte.setPrevPte(this.lastPte);
+                this.lastPte.setNextPte(this.firstPte);
+                System.out.println("La lista se ha convertido en circular!");
+            } else if (this.firstPte == this.lastPte && this.firstPte != null) {
+                // Solo hay un nodo, él se apunta a sí mismo
+                this.firstPte.setPrevPte(this.firstPte);
+                this.firstPte.setNextPte(this.firstPte);
+                System.out.println("La lista con un solo nodo también es circular ahora!");
+            } else {
+                System.out.println("La lista está vacía. No se puede hacer circular.");
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al convertir la lista en circular.");
+        }
+    }
+  
 }
