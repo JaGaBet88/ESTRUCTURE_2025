@@ -24,12 +24,13 @@ public class DoublyLinkedLists {
             System.out.println("8. Insertar un nodo después de un valor");
             System.out.println("9. Insertar un nodo antes de un valor");
             System.out.println("10. Convertir lista a circular");
-            System.out.println("11. Para Salir");
+            System.out.println("11. Insertar al final de la lista");
+            System.out.println("12. Para Salir");
 
             do {
                 System.out.println("\nIngrese la opcion: ");
                 opc = scan.nextByte();
-            } while (opc > 11);
+            } while (opc > 12);
 
             switch (opc) {
                 case 1: {
@@ -72,12 +73,16 @@ public class DoublyLinkedLists {
                     makeCircularList();
                     break;
                 }
+                case 11: {
+                    insertLast();
+                    break;
+                }
                 default: {
                     break;
                 }
             }
 
-        } while (opc != 11);
+        } while (opc != 12);
     }
 
     private static void headInsert() {
@@ -276,4 +281,30 @@ public class DoublyLinkedLists {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    private static void insertLast() {
+        char sw;
+        int age;
+        System.out.println("\n");
+    
+        do {
+            System.out.println("Ingrese una edad para insertar al final: ");
+            age = scan.nextInt();
+    
+            try {
+                if (objDoubleList.insertLast(age)) {
+                    System.out.println("Edad ingresada correctamente al final! ...");
+                    iteratorTravel();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+    
+            do {
+                System.out.println("¿Desea ingresar otra edad al final? S para Sí o N para No:");
+                sw = scan.next().toUpperCase().charAt(0);
+            } while (sw != 'S' && sw != 'N');
+    
+        } while (sw == 'S');
+    }    
 }
