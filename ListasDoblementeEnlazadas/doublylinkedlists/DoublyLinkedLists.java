@@ -30,7 +30,7 @@ public class DoublyLinkedLists {
             do {
                 System.out.println("\nIngrese la opcion: ");
                 opc = scan.nextByte();
-            } while (opc > 12);
+            } while (opc > 12 || opc < 1);
 
             switch (opc) {
                 case 1: {
