@@ -18,7 +18,7 @@ public class Rows {
             do {
                 System.out.println("Ingrese la opcion: ");
                 opc = scan.nextByte();
-            } while (opc > 4);
+            } while (opc > 7);
 
             switch (opc) {
                 case 1: {
@@ -33,11 +33,23 @@ public class Rows {
                     showRow();
                     break;
                 }
+                case 4: {
+                    sumRow();
+                    break;
+                }
+                case 5: {
+                    getFirst();
+                    break;
+                }
+                case 6: {
+                    getLast();
+                    break;
+                }
                 default: {
                     break;
                 }
             }
-        } while (opc != 4);
+        } while (opc != 7);
     }
 
     private static void menu() {
@@ -45,7 +57,10 @@ public class Rows {
         System.out.println("1. Ingresar dato al final");
         System.out.println("2. Retirar el primer dato");
         System.out.println("3. Mostrar los datos de la cola");
-        System.out.println("4. Salir");
+        System.out.println("4. Mostrar la suma de los datos de la cola");
+        System.out.println("5. Mostrar el dato del nodo a la cabeza");
+        System.out.println("6. Mostrar el dato del nodo a la cola");
+        System.out.println("7. Salir");
     }
 
     private static void insertLast() {
@@ -105,17 +120,75 @@ public class Rows {
                     countData++;
                     data = objRow.retireFirst();
                 }
-                retoreBackup();
+                restoreBackup();
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-
     }
 
-    private static void retoreBackup() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private static void sumRow() {
+        System.out.println("\nMostrando la suma de los datos de la cola");
+
+        int data, sumData = 0;
+        try {
+            data = objRow.retireFirst();
+            if (data == 0) {
+                System.out.println("La lista esta vacia!..");
+            } else {
+                while (data > 0) {
+                    sumData += data;
+                    objRowBackup.insertLast(data);
+                    data = objRow.retireFirst();
+                }
+                System.out.println("La suma de los datos de la cola es: " + sumData);
+                restoreBackup();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
-    
+    private static void getFirst() {
+        try {
+            int data = objRow.getFirst();
+            if (data > 0) {
+                System.out.println("\nMostrando el primer dato de la cola " + data);
+            } else {
+                System.out.println("\nLa cola esta vacia!...");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void getLast() {
+        try {
+            int data = objRow.getLast();
+            if (data > 0) {
+                System.out.println("\nMostrando el ultimo dato de la cola " + data);
+            } else {
+                System.out.println("\nLa cola esta vacia!...");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void restoreBackup() {
+        int data;
+        try {
+            data = objRowBackup.retireFirst();
+            if (data == 0) {
+                System.out.println("La lista esta vacia!..");
+            } else {
+                while (data > 0) {
+                    objRow.insertLast(data);
+                    data = objRowBackup.retireFirst();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    } 
 }

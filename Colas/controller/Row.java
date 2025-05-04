@@ -40,15 +40,15 @@ public class Row {
         int data = 0;
 
         try {
-            if ( !this.empty() ){
+            if (!this.empty()) {
                 data = this.firstPte.getInfo();
                 Node tmPte = this.firstPte;
                 this.firstPte = this.firstPte.getNextPte();
-                
-                if( this.firstPte == null ){
+
+                if (this.firstPte == null) {
                     this.lastPte = this.firstPte;
                 }
-                
+
                 tmPte.setNextPte(null);
                 tmPte = null;
             }
@@ -59,4 +59,27 @@ public class Row {
         }
     }
 
+    public int getFirst() throws Exception  {
+        try {
+            if (this.empty()) {
+                return 0;
+            } else {
+                return this.firstPte.getInfo();
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al retirar la primera edad de la cola!..");
+        }
+    }
+
+    public int getLast() throws Exception  {
+        try {
+            if (this.empty()) {
+                return 0;
+            } else {
+                return this.lastPte.getInfo();
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al retirar la ultima edad de la cola!..");
+        }
+    }
 }
