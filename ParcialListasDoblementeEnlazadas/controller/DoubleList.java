@@ -15,27 +15,33 @@ public class DoubleList {
     }
 
     private boolean empty() {
-        return this.firstPte == null && this.currentPte == null && this.lastPte == null;
+        return this.firstPte == null;
     }
 
-    public boolean headInsert(int value) throws Exception {
-        try {
-            Node newNode = new Node();
-            newNode.setInfo(value);
-            newNode.setPrevPte(null);
-            newNode.setNextPte(null);
+    public void headInsert(int value) {
+        Node newNode = new Node();
+        newNode.setInfo(value);
+        newNode.setPrevPte(null);
+        newNode.setNextPte(this.firstPte);
 
-            if (this.empty()) {
-                this.lastPte = this.currentPte = this.firstPte = newNode;
-            } else {
-                newNode.setNextPte(this.firstPte);
-                this.firstPte.setPrevPte(newNode);
-                this.firstPte = newNode;
-            }
-
-            return true;
-        } catch (Exception e) {
-            throw new Exception("Error al ingresar el dato a la cabeza! ...");
+        if (this.empty()) {
+            this.lastPte = newNode;
+        } else {
+            this.firstPte.setPrevPte(newNode);
         }
+        this.firstPte = newNode;
+        this.currentPte = newNode; // Mantener currentPte actualizado al insertar en la cabeza
+    }
+
+    public Node getFirstPte() {
+        return firstPte;
+    }
+
+    // Método para obtener el siguiente nodo
+    public Node getNextNode(Node currentNode) {
+        if (currentNode != null) {
+            return currentNode.getNextPte();
+        }
+        return null;
     }
 }
