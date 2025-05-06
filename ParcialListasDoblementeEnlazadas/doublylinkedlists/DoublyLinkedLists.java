@@ -7,130 +7,88 @@ import controller.DoubleList;
 public class DoublyLinkedLists {
 
     private static Scanner scan = new Scanner(System.in);
-    private static DoubleList ordinaryHourList = new DoubleList();
-    private static DoubleList extraHourTypeList = new DoubleList();
+    private static DoubleList integerList = new DoubleList();
 
     public static void main(String[] args) {
-        captureEmployeeData(); //capturar datos de empleados
-        calculateAndShowExtraHourValue(); //calcular y mostrar el valor de las horas extras
-        findAndShowLowestOrdinaryHourValue(); //buscar y mostrar el valor de la hora ordinaria más baja
+        populateIntegerList();
+        searchDataInList();
+        duplicateOrTriplicate();
     }
 
-    private static void captureEmployeeData() { //capturar datos de empleados
-        char addMoreEmployee = 'S'; // Inicializamos en 'S'
+    private static void populateIntegerList() {
+        char addMore;
+        System.out.println("\n--- Población de la Lista de Enteros ---");
         do {
-            System.out.println("\nIngrese la información del empleado:");
-            double monthlySalary = 0;
             try {
-                System.out.print("Salario mensual: ");
-                monthlySalary = scan.nextDouble();
+                System.out.print("Ingrese un número entero: ");
+                int number = scan.nextInt();
+                integerList.headInsert(number);
             } catch (InputMismatchException e) {
-                System.out.println("Error: Por favor, ingrese un valor numérico para el salario.");
-                scan.next();
-                continue;
-            }
-
-            // Calcular el valor de la hora ordinaria
-            double ordinaryHourValue = monthlySalary / 230;
-            try {
-                ordinaryHourList.headInsert((int) Math.round(ordinaryHourValue)); // Almacenar redondeado
+                System.out.println("Error: Por favor, ingrese un número entero.");
+                scan.next(); // Limpiar el buffer
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                continue;
             }
 
-            System.out.print("¿Trabajó horas extras? (S/N): ");
-            char workedExtraHours = scan.next().toUpperCase().charAt(0);
-            int extraHourType = 0;
-
-            if (workedExtraHours == 'S') {
-                System.out.println("Tipo de hora extra:");
-                System.out.println("1. Diurna");
-                System.out.println("2. Nocturna");
-                System.out.println("3. Dominical y/o festiva");
-                try {
-                    System.out.print("Seleccione el tipo (1-3): ");
-                    extraHourType = scan.nextInt();
-                    if (extraHourType < 0 || extraHourType > 3) {
-                        System.out.println("Error: Por favor, ingrese un valor entre 0 y 3.");
-                        continue;
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Error: Por favor, ingrese un número para el tipo de hora extra.");
-                    scan.next();
-                    continue;
-                }
-            } else if (workedExtraHours != 'N') {
-                System.out.println("Error: Por favor, ingrese 'S' o 'N'.");
-                continue;
-            }
-            try {
-                extraHourTypeList.headInsert(extraHourType);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                continue;
-            }
-
-            boolean validInput = false;
-            while (!validInput) {
-                System.out.print("¿Desea ingresar otro empleado? (S/N): ");
-                addMoreEmployee = scan.next().toUpperCase().charAt(0);
-                if (addMoreEmployee == 'S' || addMoreEmployee == 'N') {
-                    validInput = true;
-                } else {
-                    System.out.println("Error: Por favor, ingrese 'S' o 'N'.");
-                }
-            }
-
-        } while (addMoreEmployee == 'S');
+            System.out.print("¿Desea ingresar otro número? (S/N): ");
+            addMore = scan.next().toUpperCase().charAt(0);
+        } while (addMore == 'S');
     }
 
-    private static void calculateAndShowExtraHourValue() {
-        System.out.println("\n--- Valor de las Horas Extras por Empleado ---");
-        ordinaryHourList.resetIterator();
-        extraHourTypeList.resetIterator();
-        int employeeNumber = 1;
-        Integer ordinaryHourValue, extraHourType;
+    private static void searchDataInList() {
+        if (integerList.getFirstValue() == null) {
+            System.out.println("\nLa lista está vacía. No se puede buscar.");
+            return;
+        }
 
-        while ((ordinaryHourValue = ordinaryHourList.getNextValue()) != null &&
-               (extraHourType = extraHourTypeList.getNextValue()) != null) {
-            double extraHourValueCalculated = 0;
-            String extraHourDescription = "no suele laborar horas extras";
+        System.out.println("\n--- Búsqueda de Datos en la Lista ---");
+        try {
+            System.out.print("Ingrese el dato que desea buscar: ");
+            int searchData = scan.nextInt();
+            int occurrences = integerList.countOccurrences(searchData);
 
-            switch (extraHourType) {
-                case 1:
-                    extraHourValueCalculated = ordinaryHourValue * 1.25;
-                    extraHourDescription = "suele laborar horas extras diurnas";
-                    break;
-                case 2:
-                    extraHourValueCalculated = ordinaryHourValue * 1.35;
-                    extraHourDescription = "suele laborar horas extras nocturnas";
-                    break;
-                case 3:
-                    extraHourValueCalculated = ordinaryHourValue * 1.90;
-                    extraHourDescription = "suele laborar horas extras dominicales y/o festivas";
-                    break;
-                case 0:
-                    extraHourValueCalculated = 0;
-                    break;
+            if (occurrences > 0) {
+                System.out.println("El dato " + searchData + " se encuentra " + occurrences + " veces en la lista.");
+            } else {
+                System.out.println("El dato " + searchData + " no se encontró en la lista.");
             }
-
-            System.out.println("Empleado " + employeeNumber + " usted " + extraHourDescription + ", el valor de dicha hora es de $" + String.format("%.0f", extraHourValueCalculated));
-            employeeNumber++;
+        } catch (InputMismatchException e) {
+            System.out.println("Error: Por favor, ingrese un número entero para buscar.");
+            scan.next(); // Limpiar el buffer
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    private static void findAndShowLowestOrdinaryHourValue() {
+    // Punto 2 se implementará en el siguiente bloque
+    private static void duplicateOrTriplicate() {
+        System.out.println("\n--- Duplicando o Triplicando Datos ---");
+        DoubleList newList = new DoubleList();
+        integerList.resetIterator();
+        Integer currentValue;
+
         try {
-            Integer lowestOrdinaryHour = ordinaryHourList.findLowestValue();
-            if (lowestOrdinaryHour != null) {
-                System.out.println("\n--- Valor de la Hora Ordinaria Más Baja ---");
-                System.out.println("El valor de la hora ordinaria más baja es de: $" + lowestOrdinaryHour);
-            } else {
-                System.out.println("\nNo se ingresaron empleados.");
+            while ((currentValue = integerList.getNextValue()) != null) {
+                if (currentValue % 2 == 0) {
+                    newList.headInsert(currentValue);
+                    newList.headInsert(currentValue);
+                } else {
+                    newList.headInsert(currentValue);
+                    newList.headInsert(currentValue);
+                    newList.headInsert(currentValue);
+                }
             }
+
+            System.out.println("Nueva lista creada con los datos duplicados o triplicados:");
+            newList.resetIterator();
+            Integer newValue;
+            while ((newValue = newList.getNextValue()) != null) {
+                System.out.print(newValue + " ");
+            }
+            System.out.println();
+
         } catch (Exception e) {
-            System.out.println("Error al encontrar el valor más bajo: " + e.getMessage());
+            System.out.println("Error al duplicar o triplicar los datos: " + e.getMessage());
         }
     }
 }
