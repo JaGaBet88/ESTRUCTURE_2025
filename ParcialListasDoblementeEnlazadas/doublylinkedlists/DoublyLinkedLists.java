@@ -12,15 +12,16 @@ public class DoublyLinkedLists {
     public static void main(String[] args) {
         populateIntegerList();
         searchDataInList();
-        duplicateOrTriplicate();
+        transformAndCreateNewList();
+        showHighestValue(); // Nuevo método para mostrar el valor más alto
     }
 
     private static void populateIntegerList() {
         char addMore;
-        System.out.println("\n--- Población de la Lista de Enteros ---");
+        System.out.println("--- Ingreso de Precios de Artículos ---");
         do {
             try {
-                System.out.print("Ingrese un número entero: ");
+                System.out.print("Ingrese el precio del artículo: ");
                 int number = scan.nextInt();
                 integerList.headInsert(number);
             } catch (InputMismatchException e) {
@@ -30,7 +31,7 @@ public class DoublyLinkedLists {
                 System.out.println(e.getMessage());
             }
 
-            System.out.print("¿Desea ingresar otro número? (S/N): ");
+            System.out.print("¿Desea ingresar otro precio? (S/N): ");
             addMore = scan.next().toUpperCase().charAt(0);
         } while (addMore == 'S');
     }
@@ -43,14 +44,14 @@ public class DoublyLinkedLists {
 
         System.out.println("\n--- Búsqueda de Datos en la Lista ---");
         try {
-            System.out.print("Ingrese el dato que desea buscar: ");
+            System.out.print("Ingrese el precio que desea buscar: ");
             int searchData = scan.nextInt();
             int occurrences = integerList.countOccurrences(searchData);
 
             if (occurrences > 0) {
-                System.out.println("El dato " + searchData + " se encuentra " + occurrences + " veces en la lista.");
+                System.out.println("El precio $" + searchData + " se encuentra " + occurrences + " veces en la lista.");
             } else {
-                System.out.println("El dato " + searchData + " no se encontró en la lista.");
+                System.out.println("El precio $" + searchData + " no se encontró en la lista.");
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: Por favor, ingrese un número entero para buscar.");
@@ -60,35 +61,47 @@ public class DoublyLinkedLists {
         }
     }
 
-    // Punto 2 se implementará en el siguiente bloque
-    private static void duplicateOrTriplicate() {
-        System.out.println("\n--- Duplicando o Triplicando Datos ---");
+    private static void transformAndCreateNewList() {
+        System.out.println("\n--- Transformación de Precios ---");
         DoubleList newList = new DoubleList();
         integerList.resetIterator();
         Integer currentValue;
 
         try {
             while ((currentValue = integerList.getNextValue()) != null) {
+                int newValue;
                 if (currentValue % 2 == 0) {
-                    newList.headInsert(currentValue);
-                    newList.headInsert(currentValue);
+                    newValue = currentValue * 2;
                 } else {
-                    newList.headInsert(currentValue);
-                    newList.headInsert(currentValue);
-                    newList.headInsert(currentValue);
+                    newValue = currentValue * 3;
                 }
+                newList.headInsert(newValue);
             }
 
-            System.out.println("Nueva lista creada con los datos duplicados o triplicados:");
+            System.out.println("Nueva lista con los precios transformados:");
             newList.resetIterator();
-            Integer newValue;
-            while ((newValue = newList.getNextValue()) != null) {
-                System.out.print(newValue + " ");
+            Integer transformedValue;
+            while ((transformedValue = newList.getNextValue()) != null) {
+                System.out.print(transformedValue + " ");
             }
             System.out.println();
 
         } catch (Exception e) {
-            System.out.println("Error al duplicar o triplicar los datos: " + e.getMessage());
+            System.out.println("Error al transformar los precios: " + e.getMessage());
+        }
+    }
+
+    private static void showHighestValue() {
+        System.out.println("\n--- Valor del Artículo con el Precio de Venta Más Alto ---");
+        try {
+            Integer highestPrice = integerList.findHighestValue();
+            if (highestPrice != null) {
+                System.out.println("El precio de venta más alto es: " + highestPrice);
+            } else {
+                System.out.println("No se ingresaron precios de artículos.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al encontrar el precio más alto: " + e.getMessage());
         }
     }
 }

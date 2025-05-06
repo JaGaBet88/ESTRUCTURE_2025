@@ -74,4 +74,25 @@ public class DoubleList {
             this.resetIterator();
         }
     }
+
+    public Integer findHighestValue() throws Exception {
+        try {
+            if (this.empty()) {
+                return null; // O lanzar una excepción
+            }
+            int highest = Integer.MIN_VALUE;
+            this.currentPte = this.firstPte;
+            while (this.currentPte != null) {
+                if (this.currentPte.getInfo() > highest) {
+                    highest = this.currentPte.getInfo();
+                }
+                this.currentPte = this.currentPte.getNextPte();
+            }
+            return highest;
+        } catch (Exception e) {
+            throw new Exception("Error al encontrar el valor más alto: " + e.getMessage());
+        } finally {
+            this.resetIterator();
+        }
+    }
 }
