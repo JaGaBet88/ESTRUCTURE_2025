@@ -17,6 +17,7 @@ public class DoublyLinkedLists {
     }
 
     private static void populateIntegerList() {
+        System.out.println("\nDesarrollado por: Jairo Alberto Gallego Betancur");
         char addMore;
         System.out.println("--- Ingreso de Precios de Artículos ---");
         do {
