@@ -1,6 +1,3 @@
-// package controller; // Se mantiene el paquete
-// import model.Node; // Se mantiene la importación
-
 package controller;
 
 import model.Node;
@@ -10,7 +7,7 @@ public class Row {
     private Node firstPte;
     private Node lastPte;
 
-    private boolean empty() {
+    public boolean empty() {
         return this.firstPte == null && this.lastPte == null;
     }
 
@@ -19,7 +16,7 @@ public class Row {
         this.lastPte = null;
     }
 
-    public boolean insertLast(String value) throws Exception { // Cambiado de int a String
+    public boolean insertLast(String value) throws Exception {
         try {
             Node newNode = new Node();
             newNode.setInfo(value);
@@ -33,7 +30,7 @@ public class Row {
             }
             return true;
         } catch (Exception e) {
-            throw new Exception("Error al ingresar el nombre!"); // Mensaje adaptado
+            throw new Exception("Error al ingresar el nombre!");
         }
     }
 

@@ -1,17 +1,15 @@
-// package model; // Se mantiene el paquete
-
 package model;
 
 public class Node {
 
-    private String info; // Cambiado de int a String
+    private String info; 
     private Node nextPte;
 
-    public String getInfo() { // Cambiado el tipo de retorno
+    public String getInfo() {
         return info;
     }
 
-    public void setInfo(String info) { // Cambiado el tipo de parámetro
+    public void setInfo(String info) {
         this.info = info;
     }
 
