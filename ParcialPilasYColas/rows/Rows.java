@@ -132,19 +132,6 @@ public class Rows {
         }
     }
 
-    private static void getLast() {
-        try {
-            String data = objRow.getLast();
-            if (data != null) {
-                System.out.println("El ultimo nombre en la cola es: " + data);
-            } else {
-                System.out.println("La cola esta vacia!...");
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
     private static void restoreBackup() {
         String data;
         try {
@@ -162,9 +149,6 @@ public class Rows {
         }
     }
 
-    // --- Implementación de los puntos del ejercicio (sin cambios significativos, solo ajustes de flujo) ---
-
-    // Punto 1: Solicitar y retirar persona
     private static void searchAndRemovePerson() {
         System.out.println("\n--- Punto 1: Retirar persona ---");
         if (objRow.empty()) {
@@ -176,12 +160,10 @@ public class Rows {
         String nameToRetire = scan.next();
 
         try {
-            // Realizar una "búsqueda" temporal para ver si el nombre existe sin modificar la cola principal
             Row tempQueue = new Row();
             boolean foundInQueue = false;
             String currentName;
 
-            // Mover elementos a la cola temporal para buscar
             while ((currentName = objRow.retireFirst()) != null) {
                 if (currentName.equalsIgnoreCase(nameToRetire)) {
                     foundInQueue = true;
@@ -195,9 +177,7 @@ public class Rows {
             }
 
             if (foundInQueue) {
-                // Si la persona existe, intentar eliminarla
                 if (objRow.removeSpecific(nameToRetire)) {
-                    // Mensaje ya impreso dentro de removeSpecific
                 } else {
                     System.out.println("El nombre '" + nameToRetire + "' no se pudo eliminar (error interno).");
                 }
@@ -210,12 +190,10 @@ public class Rows {
         }
     }
 
-
     // Punto 2: Crear y concatenar segunda cola
     private static void concatenateQueues() {
         System.out.println("\n--- Punto 2: Concatenar colas ---");
 
-        // Primero, verificar si la cola principal está vacía para concatenar
         try {
             if (objRow.empty()) {
                 System.out.println("La cola principal está vacía. Ingrese nombres primero (Opción 1 del menú).");
@@ -226,11 +204,8 @@ public class Rows {
             return;
         }
 
-
-        // Asegurarse de que la segunda cola esté vacía antes de llenarla para este ejercicio
         try {
             while (objRowSecond.retireFirst() != null) {
-                // Vaciar la segunda cola
             }
         } catch (Exception e) {
              System.out.println("Error al vaciar la segunda cola: " + e.getMessage());
@@ -238,7 +213,6 @@ public class Rows {
 
 
         try {
-            // Llenar la segunda cola según la imagen
             objRowSecond.insertLast("Paulina");
             objRowSecond.insertLast("Jaime");
             System.out.println("Segunda cola creada: Paulina -> Jaime");
@@ -277,11 +251,8 @@ public class Rows {
 
             Row tempQueue = new Row();
             String currentName;
-            String nameFoundOrNew = nameToReorder; // El nombre que se moverá al principio
-
-            // Paso 1: Mover todos los elementos de objRow a tempQueue,
-            // excluyendo el nombre que se va a reordenar si ya existe.
-            // Esto asegura que si ya está, no lo dupliquemos y lo movamos.
+            String nameFoundOrNew = nameToReorder; 
+            
             while ((currentName = objRow.retireFirst()) != null) {
                 if (!currentName.equalsIgnoreCase(nameToReorder)) {
                     tempQueue.insertLast(currentName);
@@ -291,12 +262,8 @@ public class Rows {
                 }
             }
 
-            // Paso 2: Insertar el nombre a mover al principio de la cola principal (que ahora está vacía).
-            // Si el nombre no estaba inicialmente en la cola, ahora será el primero.
             objRow.insertLast(nameFoundOrNew);
 
-            // Paso 3: Volver a insertar los elementos restantes desde la cola temporal.
-            // Estos irán después del nombre que se acaba de colocar al principio.
             while ((currentName = tempQueue.retireFirst()) != null) {
                 objRow.insertLast(currentName);
             }
